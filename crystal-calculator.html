@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水晶能量计算器 - 神秘主义版</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <!-- 统一的 Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FFFFFF',
+                        secondary: '#FF7F00',
+                        wood: '#7BA05B',
+                        fire: '#D36582',
+                        earth: '#D3B17D',
+                        metal: '#70A9A1',
+                        water: '#5C80BC',
+                        dark: '#0A1929',
+                        'dark-blue': '#0D2137',
+                        'dark-purple': '#081420',
+                        'orange': '#FF7F00',
+                        'orange-light': '#FF9E40',
+                        'orange-dark': '#CC6600'
+                    },
+                    fontFamily: {
+                        sans: ['SimHei', 'Microsoft YaHei', 'sans-serif'],
+                        magic: ['SimHei', 'Microsoft YaHei', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scroll-left': 'scrollLeft 30s linear infinite',
+                        'scroll-right': 'scrollRight 30s linear infinite',
+                        'ping-slow': 'pingSlow 3s cubic-bezier(0, 0, 0.2, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'spin-slow': 'spin 20s linear infinite',
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-down': 'slideDown 0.8s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        scrollLeft: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        },
+                        scrollRight: {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0)' }
+                        },
+                        pingSlow: {
+                            '0%': { transform: 'scale(1)', opacity: 1 },
+                            '75%, 100%': { transform: 'scale(2)', opacity: 0 }
+                        },
+                        glow: {
+                            '0%': { textShadow: '0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700' },
+                            '100%': { textShadow: '0 0 10px #FFDF33, 0 0 20px #FFDF33, 0 0 30px #FFDF33' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow-white {
+                text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+            }
+            .text-shadow-glow {
+                text-shadow: 0 0 10px rgba(255, 127, 0, 0.5), 0 0 20px rgba(255, 127, 0, 0.3);
+            }
+            .magic-button {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 
+                            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+                border-radius: 16px;
+            }
+            .magic-button:hover {
+                background: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 
+                            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+                transform: translateY(-2px);
+            }
+            .magic-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 
+                            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+                transition: all 0.3s ease;
+                border-radius: 24px;
+                position: relative;
+                z-index: 1;
+            }
+            .magic-card:hover {
+                background: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 
+                            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.15);
+            }
+            .input-magic {
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 127, 0, 0.3);
+                transition: all 0.3s ease;
+                color: #FFFFFF;
+            }
+            .input-magic:focus {
+                background: rgba(255, 255, 255, 0.15);
+                box-shadow: 0 0 15px rgba(255, 127, 0, 0.2);
+                border-color: rgba(255, 127, 0, 0.5);
+            }
+            .crystal-shadow {
+                box-shadow: 0 8px 32px rgba(255, 127, 0, 0.2);
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, rgba(255, 127, 0, 0.1) 0%, rgba(255, 127, 0, 0.05) 100%);
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .neon-border {
+                box-shadow: 0 0 5px rgba(255, 127, 0, 0.2), 
+                            0 0 10px rgba(255, 127, 0, 0.1),
+                            inset 0 0 5px rgba(255, 127, 0, 0.05);
+            }
+            .orange-border {
+                border: 1px solid rgba(255, 127, 0, 0.3);
+            }
+            .status-indicator {
+                position: relative;
+            }
+            .status-indicator::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: -20px;
+                transform: translateY(-50%);
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: rgba(255, 127, 0, 0.8);
+                animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+                z-index: 10;
+            }
+            .status-indicator::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: -20px;
+                transform: translateY(-50%);
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: rgba(255, 127, 0, 0.3);
+                animation: pingSlow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+                z-index: 5;
+            }
+            .image-hover-effect {
+                transition: all 0.5s ease-out;
+                filter: brightness(0.9) saturate(0.9);
+            }
+            .image-hover-effect:hover {
+                filter: brightness(1.1) saturate(1.1);
+                transform: scale(1.05);
+            }
+            .infinite-scroll-container {
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+            }
+            .infinite-scroll-content {
+                display: flex;
+                width: fit-content;
+            }
+            .scroll-mask-left, .scroll-mask-right {
+                position: absolute;
+                top: 0;
+                height: 100%;
+                width: 40px;
+                z-index: 20;
+            }
+            .scroll-mask-left {
+                left: 0;
+                background: linear-gradient(to right, rgba(10, 25, 41, 0.9), transparent);
+            }
+            .scroll-mask-right {
+                right: 0;
+                background: linear-gradient(to left, rgba(10, 25, 41, 0.9), transparent);
+            }
+            .magic-circle {
+                position: relative;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(255, 127, 0, 0.1) 0%, transparent 70%);
+                overflow: hidden;
+            }
+            .magic-circle::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: 50%;
+                border: 2px solid rgba(255, 127, 0, 0.3);
+                animation: spin-slow 20s linear infinite;
+                z-index: 2;
+            }
+            .magic-circle::after {
+                content: '';
+                position: absolute;
+                inset: 2px;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 127, 0, 0.1);
+                z-index: 2;
+            }
+            .magic-circle img {
+                position: relative;
+                z-index: 1;
+            }
+            .magic-circle .absolute {
+                z-index: 3;
+            }
+            .pentagram {
+                position: relative;
+            }
+            .pentagram::before {
+                content: '✧';
+                position: absolute;
+                top: -20px;
+                right: -20px;
+                color: rgba(255, 127, 0, 0.6);
+                font-size: 24px;
+                animation: float 3s ease-in-out infinite;
+                z-index: 20;
+            }
+            .stars-bg {
+                background-image: 
+                    radial-gradient(circle at 25% 25%, rgba(255, 127, 0, 0.1) 1px, transparent 1px),
+                    radial-gradient(circle at 75% 75%, rgba(255, 127, 0, 0.05) 1px, transparent 1px);
+                background-size: 50px 50px, 100px 100px;
+            }
+            .glow-effect {
+                position: relative;
+            }
+            .glow-effect::before {
+                content: '';
+                position: absolute;
+                inset: -5px;
+                border-radius: inherit;
+                background: radial-gradient(circle, rgba(255, 127, 0, 0.2) 0%, transparent 70%);
+                z-index: -1;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .glow-effect:hover::before {
+                opacity: 1;
+            }
+            .main-gradient {
+                background: linear-gradient(135deg, #0A1929 0%, #0D2137 100%);
+            }
+            .nav-bg {
+                background: rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            .record-border {
+                border: 2px solid #FF7F00;
+                box-shadow: 0 0 20px rgba(255, 127, 0, 0.3);
+            }
+        }
+    </style>
+</head>
+<body class="main-gradient text-primary min-h-screen stars-bg">
+    <!-- 背景魔法阵 -->
+    <div class="fixed inset-0 z-0 opacity-20 pointer-events-none">
+        <img src="https://p11-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/dd3e30d600ae4f95a8ecb003dd07a644~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605121407351A89BFEA1594A5CD5739&rrcfp=f06b921b&x-expires=1781158121&x-signature=s8FCS9yMYcrUPvD3InUS30PT4p8%3D" 
+             alt="魔法阵背景" 
+             class="w-full h-full object-cover animate-spin-slow">
+    </div>
+    
+    <!-- 自定义鼠标 -->
+    <div id="custom-cursor" class="fixed w-6 h-6 rounded-full border border-gold pointer-events-none mix-blend-difference z-50 transform -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-300"></div>
+    
+    <!-- 顶部装饰 -->
+    <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-wood via-fire to-earth"></div>
+    
+    <!-- 主容器 -->
+    <div class="container mx-auto px-4 py-12 max-w-6xl relative z-10" style="min-height: 100vh; overflow: visible;">
+        <!-- 标题区域 -->
+        <header class="text-center mb-16 animate-fade-in">
+            <div class="inline-flex items-center gap-3 px-4 py-2 mb-6 nav-bg rounded-lg orange-border">
+                <div class="relative">
+                    <div class="h-2 w-2 rounded-full bg-orange/80 animate-pulse-slow"></div>
+                    <div class="absolute inset-0 h-2 w-2 rounded-full bg-orange/30 animate-ping-slow"></div>
+                </div>
+                <span class="text-sm text-orange/700 font-magic">石来运转 · 水晶能量分析</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold text-primary mb-4 text-shadow-glow tracking-tight font-magic animate-glow">水晶能量计算器</h1>
+            <p class="text-orange/700 max-w-2xl mx-auto text-lg font-magic">探索水晶与五行的奥秘，发现专属于你的能量平衡之道</p>
+        </header>
+
+        <!-- 无限滚动标签 -->
+        <div class="infinite-scroll-container mb-16">
+            <div class="scroll-mask-left"></div>
+            <div class="scroll-mask-right"></div>
+            
+            <div class="flex animate-scroll-left infinite-scroll-content">
+                <div class="flex gap-4 whitespace-nowrap pr-4">
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">神秘主义</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">五行平衡</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">水晶能量</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">魔法阵</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">能量疗愈</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">占星术</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">神秘学</span>
+                </div>
+                <div class="flex gap-4 whitespace-nowrap pr-4">
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">神秘主义</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">五行平衡</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">水晶能量</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">魔法阵</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">能量疗愈</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">占星术</span>
+                    <span class="px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect">神秘学</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <main>
+            <!-- 输入表单区域 -->
+            <section id="input-section" class="magic-card rounded-2xl p-8 mb-16 crystal-shadow neon-border animate-slide-up">
+                <h2 class="text-2xl font-semibold text-orange mb-6 status-indicator font-magic">输入你的信息</h2>
+                
+                <form id="birth-form" class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- 出生日期输入 -->
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-medium text-orange/80 font-magic">出生公历</h3>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <!-- 年份选择 -->
+                                <div class="glow-effect">
+                                    <label for="year" class="block text-sm font-medium text-orange/60 mb-2 font-magic">年</label>
+                                    <select id="year" name="year" class="w-full px-4 py-3 rounded-lg input-magic focus:outline-none focus:ring-2 focus:ring-gold/50">
+                                        <option value="">选择</option>
+                                        <!-- 年份选项将通过JS动态生成 -->
+                                    </select>
+                                </div>
+                                
+                                <!-- 月份选择 -->
+                                <div class="glow-effect">
+                                    <label for="month" class="block text-sm font-medium text-orange/60 mb-2 font-magic">月</label>
+                                    <select id="month" name="month" class="w-full px-4 py-3 rounded-lg input-magic focus:outline-none focus:ring-2 focus:ring-gold/50">
+                                        <option value="">选择</option>
+                                        <!-- 月份选项将通过JS动态生成 -->
+                                    </select>
+                                </div>
+                                
+                                <!-- 日期选择 -->
+                                <div class="glow-effect">
+                                    <label for="day" class="block text-sm font-medium text-orange/60 mb-2 font-magic">日</label>
+                                    <select id="day" name="day" class="w-full px-4 py-3 rounded-lg input-magic focus:outline-none focus:ring-2 focus:ring-gold/50">
+                                        <option value="">选择</option>
+                                        <!-- 日期选项将通过JS动态生成 -->
+                                    </select>
+                                </div>
+                                
+                                <!-- 时辰选择 -->
+                                <div class="glow-effect">
+                                    <label for="hour" class="block text-sm font-medium text-orange/60 mb-2 font-magic">时</label>
+                                    <select id="hour" name="hour" class="w-full px-4 py-3 rounded-lg input-magic focus:outline-none focus:ring-2 focus:ring-gold/50">
+                                        <option value="">选择</option>
+                                        <option value="23-1">子时 (23:00-01:00)</option>
+                                        <option value="1-3">丑时 (01:00-03:00)</option>
+                                        <option value="3-5">寅时 (03:00-05:00)</option>
+                                        <option value="5-7">卯时 (05:00-07:00)</option>
+                                        <option value="7-9">辰时 (07:00-09:00)</option>
+                                        <option value="9-11">巳时 (09:00-11:00)</option>
+                                        <option value="11-13">午时 (11:00-13:00)</option>
+                                        <option value="13-15">未时 (13:00-15:00)</option>
+                                        <option value="15-17">申时 (15:00-17:00)</option>
+                                        <option value="17-19">酉时 (17:00-19:00)</option>
+                                        <option value="19-21">戌时 (19:00-21:00)</option>
+                                        <option value="21-23">亥时 (21:00-23:00)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 性别选择 -->
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-medium text-orange/80 font-magic">性别</h3>
+                            <div class="flex space-x-6">
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="radio" name="gender" value="male" class="h-6 w-6 text-gold/50 focus:ring-gold/50">
+                                    <span class="text-orange/80 text-lg font-magic">男</span>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="radio" name="gender" value="female" class="h-6 w-6 text-gold/50 focus:ring-gold/50">
+                                    <span class="text-orange/80 text-lg font-magic">女</span>
+                                </label>
+                            </div>
+                            
+                            <!-- 提交按钮 -->
+                            <button type="submit" class="group relative overflow-hidden rounded-lg p-[1px] w-full glow-effect">
+                                <!-- 发光边框层 -->
+                                <div class="absolute inset-0 bg-gradient-to-br from-orange/30 to-orange/10 backdrop-blur-lg">
+                                    <!-- 右上角发光效果 -->
+                                    <div class="absolute -top-4 -right-4 h-12 w-12 rounded-full bg-orange/20 blur-md transition-all duration-300 group-hover:h-16 group-hover:w-16 group-hover:bg-orange/30"></div>
+                                    <!-- 左下角发光效果 -->
+                                    <div class="absolute -bottom-6 -left-4 h-10 w-10 rounded-full bg-orange/10 blur-md transition-all duration-300 group-hover:h-14 group-hover:w-14 group-hover:bg-orange/20"></div>
+                                </div>
+
+                                <!-- 按钮内容 -->
+                                <div class="relative px-6 py-4 nav-bg rounded-lg orange-border w-full hover-effect">
+                                    <span class="relative z-10 text-orange font-medium tracking-wide text-center block font-magic">开启我的神秘能量之旅</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+            <!-- 结果展示区域 (初始隐藏) -->
+            <section id="result-section" class="hidden space-y-16" style="position: relative; z-index: 5;">
+                <!-- 本命主串结果 -->
+                <div class="magic-card rounded-2xl p-8 crystal-shadow neon-border animate-scale-in">
+                    <h2 class="text-2xl font-semibold text-orange mb-6 status-indicator font-magic">你的本命能量主串</h2>
+                    
+                    <div class="magic-card rounded-xl p-6 mb-8 pentagram">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                            <!-- 主串图片 -->
+                            <div class="w-40 h-40 md:w-56 md:h-56 magic-circle flex items-center justify-center overflow-hidden relative">
+                                <img id="main-crystal-image" src="" alt="本命主串" class="w-4/5 h-4/5 object-contain animate-float image-hover-effect">
+                                <div class="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent rounded-full"></div>
+                                <!-- 魔法符文装饰 -->
+                                <div class="absolute top-2 left-2 w-8 h-8 text-gold/50 flex items-center justify-center">
+                                    <span class="text-xl">✧</span>
+                                </div>
+                                <div class="absolute bottom-2 right-2 w-8 h-8 text-gold/50 flex items-center justify-center">
+                                    <span class="text-xl">✦</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 主串信息 -->
+                            <div class="flex-1">
+                                <div class="flex items-center mb-4">
+                                    <div id="element-icon" class="w-10 h-10 rounded-full flex items-center justify-center mr-3 gold-border"></div>
+                                    <h3 id="main-crystal-name" class="text-xl font-medium text-primary font-magic"></h3>
+                                </div>
+                                
+                                <p id="element-info" class="text-orange/700 mb-4 text-lg font-magic"></p>
+                                
+                                <div class="bg-orange/5 rounded-lg p-4 orange-border glow-effect">
+                                    <p id="main-crystal-effect" class="text-orange/800 font-magic"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 五行分析图表 -->
+                    <div class="magic-card rounded-xl p-6">
+                        <h3 class="text-xl font-medium text-orange/80 mb-4 font-magic">你的五行能量图谱</h3>
+                        <div class="h-80">
+                            <canvas id="element-chart"></canvas>
+                        </div>
+                        <div class="grid grid-cols-5 gap-3 mt-6">
+                            <div class="text-center hover-effect glow-effect">
+                                <div class="w-8 h-8 mx-auto rounded-full bg-wood orange-border"></div>
+                                <span class="text-sm text-orange/700 mt-2 block font-magic">木</span>
+                            </div>
+                            <div class="text-center hover-effect glow-effect">
+                                <div class="w-8 h-8 mx-auto rounded-full bg-fire orange-border"></div>
+                                <span class="text-sm text-orange/700 mt-2 block font-magic">火</span>
+                            </div>
+                            <div class="text-center hover-effect glow-effect">
+                                <div class="w-8 h-8 mx-auto rounded-full bg-earth orange-border"></div>
+                                <span class="text-sm text-orange/700 mt-2 block font-magic">土</span>
+                            </div>
+                            <div class="text-center hover-effect glow-effect">
+                                <div class="w-8 h-8 mx-auto rounded-full bg-metal orange-border"></div>
+                                <span class="text-sm text-orange/700 mt-2 block font-magic">金</span>
+                            </div>
+                            <div class="text-center hover-effect glow-effect">
+                                <div class="w-8 h-8 mx-auto rounded-full bg-water orange-border"></div>
+                                <span class="text-sm text-orange/700 mt-2 block font-magic">水</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 今日幸运能量串 -->
+                <div class="magic-card rounded-2xl p-8 crystal-shadow neon-border animate-slide-down">
+                    <h2 class="text-2xl font-semibold text-orange mb-6 status-indicator font-magic">今日幸运能量串</h2>
+                    <p class="text-orange/700 mb-8 font-magic">根据你的五行属性，今日最适合佩戴的幸运水晶，为你带来一天的好运加持</p>
+                    
+                    <div id="daily-crystal-container" class="magic-card rounded-xl p-6 mb-8 pentagram">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                            <!-- 幸运串图片 -->
+                            <div class="w-40 h-40 md:w-56 md:h-56 magic-circle flex items-center justify-center overflow-hidden relative">
+                                <img id="daily-crystal-image" src="" alt="今日幸运串" class="w-full h-full object-cover animate-float image-hover-effect">
+                                <div class="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent rounded-full z-10"></div>
+                                <!-- 魔法符文装饰 -->
+                                <div class="absolute top-2 left-2 w-8 h-8 text-gold/50 flex items-center justify-center z-20">
+                                    <span class="text-xl">✧</span>
+                                </div>
+                                <div class="absolute bottom-2 right-2 w-8 h-8 text-gold/50 flex items-center justify-center z-20">
+                                    <span class="text-xl">✦</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 幸运串信息 -->
+                            <div class="flex-1">
+                                <div class="flex items-center mb-4">
+                                    <div id="daily-element-icon" class="w-10 h-10 rounded-full flex items-center justify-center mr-3 orange-border"></div>
+                                    <h3 id="daily-crystal-name" class="text-xl font-medium text-orange font-magic"></h3>
+                                </div>
+                                
+                                <p id="daily-element-info" class="text-orange/700 mb-4 text-lg font-magic"></p>
+                                
+                                <div class="bg-orange/5 rounded-lg p-4 orange-border glow-effect">
+                                    <p id="daily-crystal-effect" class="text-orange/800 font-magic"></p>
+                                </div>
+                                
+                                <!-- 今日幸运指数 -->
+                                <div class="mt-6">
+                                    <h4 class="text-lg text-orange/80 mb-3 font-magic">今日幸运指数</h4>
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex gap-1">
+                                            <span class="text-xl text-orange/80">★</span>
+                                            <span class="text-xl text-orange/80">★</span>
+                                            <span class="text-xl text-orange/80">★</span>
+                                            <span class="text-xl text-orange/80">★</span>
+                                            <span class="text-xl text-orange/30">★</span>
+                                        </div>
+                                        <span class="text-sm text-orange/60 font-magic">80%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 职场加持能量串 -->
+                <div class="magic-card rounded-2xl p-8 crystal-shadow neon-border animate-slide-down">
+                    <h2 class="text-2xl font-semibold text-orange mb-6 status-indicator font-magic">职场加持能量串</h2>
+                    <p class="text-orange/700 mb-8 font-magic">专为职场人士设计的能量加持，助你在职场中如鱼得水，事业蒸蒸日上</p>
+                    
+                    <div id="career-crystal-container" class="magic-card rounded-xl p-6 mb-8 pentagram">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                            <!-- 职场串图片 -->
+                            <div class="w-40 h-40 md:w-56 md:h-56 magic-circle flex items-center justify-center overflow-hidden relative">
+                                <img id="career-crystal-image" src="" alt="职场加持串" class="w-full h-full object-cover animate-float image-hover-effect">
+                                <div class="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent rounded-full z-10"></div>
+                                <!-- 魔法符文装饰 -->
+                                <div class="absolute top-2 left-2 w-8 h-8 text-gold/50 flex items-center justify-center z-20">
+                                    <span class="text-xl">✧</span>
+                                </div>
+                                <div class="absolute bottom-2 right-2 w-8 h-8 text-gold/50 flex items-center justify-center z-20">
+                                    <span class="text-xl">✦</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 职场串信息 -->
+                            <div class="flex-1">
+                                <div class="flex items-center mb-4">
+                                    <div id="career-element-icon" class="w-10 h-10 rounded-full flex items-center justify-center mr-3 orange-border"></div>
+                                    <h3 id="career-crystal-name" class="text-xl font-medium text-orange font-magic"></h3>
+                                </div>
+                                
+                                <p id="career-element-info" class="text-orange/700 mb-4 text-lg font-magic"></p>
+                                
+                                <div class="bg-orange/5 rounded-lg p-4 orange-border glow-effect">
+                                    <p id="career-crystal-effect" class="text-orange/800 font-magic"></p>
+                                </div>
+                                
+                                <!-- 职场助力方向 -->
+                                <div class="mt-6">
+                                    <h4 class="text-lg text-orange/80 mb-3 font-magic">职场助力方向</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-3 py-1 bg-orange/10 text-orange/80 rounded-full text-sm orange-border font-magic">人际关系</span>
+                                        <span class="px-3 py-1 bg-orange/10 text-orange/80 rounded-full text-sm orange-border font-magic">事业晋升</span>
+                                        <span class="px-3 py-1 bg-orange/10 text-orange/80 rounded-full text-sm orange-border font-magic">财运提升</span>
+                                        <span class="px-3 py-1 bg-orange/10 text-orange/80 rounded-full text-sm orange-border font-magic">专业能力</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 能量滴流选择 -->
+                <div class="magic-card rounded-2xl p-8 crystal-shadow neon-border animate-slide-down" style="margin-bottom: 8rem;">
+                    <h2 class="text-2xl font-semibold text-orange mb-6 status-indicator font-magic">能量加持·神秘滴流</h2>
+                    <p class="text-orange/700 mb-8 font-magic">选择适合你的能量滴流，与本命主串共振，所求方向力量翻倍</p>
+                    
+                    <div id="energy-drops-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- 滴流选项将通过JS动态生成 -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- 底部信息 -->
+    <footer class="text-center text-orange/50 text-sm py-12 mt-32 relative z-30 clear-both" style="background: linear-gradient(135deg, #0A1929 0%, #0D2137 100%); border-top: 1px solid rgba(255, 127, 0, 0.2);">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="inline-flex items-center gap-3 mb-6">
+                <div class="h-1 w-1 rounded-full bg-orange animate-pulse"></div>
+                <span class="text-orange/50 font-magic">神秘与能量的融合</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-orange/60 mb-12">
+                <div>
+                    <h2 class="text-2xl font-medium bg-gradient-to-r from-orange to-orange/80 bg-clip-text text-transparent mb-4 font-magic">水晶能量</h2>
+                    <p class="max-w-xs font-magic">探索水晶与五行的奥秘，发现专属于你的能量平衡之道</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <h3 class="text-lg text-orange/80 font-magic">神秘链接</h3>
+                    <ul class="space-y-2 font-magic">
+                        <li><a href="#" class="hover:text-orange transition-colors hover-effect">水晶奥秘</a></li>
+                        <li><a href="#" class="hover:text-orange transition-colors hover-effect">五行理论</a></li>
+                        <li><a href="#" class="hover:text-orange transition-colors hover-effect">魔法指南</a></li>
+                        <li><a href="#" class="hover:text-orange transition-colors hover-effect">关于我们</a></li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <h3 class="text-lg text-orange/80 font-magic">联系我们</h3>
+                    <p class="font-magic">Email: dsart99@126.com</p>
+                    <p class="font-magic">微信: SAGEBOOK</p>
+                </div>
+            </div>
+            
+            <p class="font-magic">© 2026 水晶能量计算器 | 由DSArt+AI.STUDIO创新工作室版权所有</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 自定义鼠标跟随效果
+        const cursor = document.getElementById('custom-cursor');
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+
+        // 初始显示光标
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.opacity = '1';
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // 平滑跟随效果
+        function animateCursor() {
+            const speed = 0.2; // 跟随速度
+            cursorX += (mouseX - cursorX) * speed;
+            cursorY += (mouseY - cursorY) * speed;
+        
+            cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+            requestAnimationFrame(animateCursor);
+        }
+
+        animateCursor();
+
+        // 悬停效果示例
+        const hoverElements = document.querySelectorAll('.hover-effect');
+        hoverElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.classList.add('cursor-hover');
+                // 扩大鼠标指示器
+                cursor.style.width = '64px';
+                cursor.style.height = '64px';
+                cursor.style.borderColor = 'rgba(255, 127, 0, 0.8)';
+            });
+        
+            element.addEventListener('mouseleave', () => {
+                cursor.classList.remove('cursor-hover');
+                // 恢复原始大小
+                cursor.style.width = '24px';
+                cursor.style.height = '24px';
+                cursor.style.borderColor = 'rgba(255, 127, 0, 0.5)';
+            });
+        });
+
+        // 水晶数据
+        const crystalData = {
+            // 主串水晶
+            mainCrystals: {
+                wood: {
+                    name: "绿幽灵主串",
+                    element: "木",
+                    color: "#7BA05B",
+                    effect: "旺事业贵人、稳情绪、助成长、补木气",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/336e299034a89a8c38a3b589ea786d4c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=Pfp0k2FgVEC5Jm6c5ECb5KZAmVc%3D"
+                },
+                fire: {
+                    name: "红玛瑙主串",
+                    element: "火",
+                    color: "#D36582",
+                    effect: "激发活力、增强自信、改善人际关系、旺桃花",
+                    image: "https://p11-doubao-search-sign.byteimg.com/labis/65639679ebcd63d62c24aacce691fd9b~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=rAPoBb%2FCHtfqxJyHIJX4FPuljWs%3D"
+                },
+                earth: {
+                    name: "黄水晶主串",
+                    element: "土",
+                    color: "#D3B17D",
+                    effect: "稳固财运、增强耐力、保健康、提升事业运",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/4fc2d82f45a3dc6ec17052b06ec82bad~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=8KYHxgR2mOFKlliP1VrOhykKsHI%3D"
+                },
+                metal: {
+                    name: "白水晶主串",
+                    element: "金",
+                    color: "#70A9A1",
+                    effect: "增强决断力、招财、净化负能量、提升智慧",
+                    image: "https://p26-doubao-search-sign.byteimg.com/labis/1d986eac87c6ec6cfd82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=ZhEXU5WKtILrsOQEzpiPSZLkM%2F8%3D"
+                },
+                water: {
+                    name: "海蓝宝主串",
+                    element: "水",
+                    color: "#5C80BC",
+                    effect: "提升智慧、舒缓情绪、增强沟通、防小人",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=roeolHELAy6P8LxkRq5oQvtyRG8%3D"
+                }
+            },
+            
+            // 今日幸运能量串
+            dailyCrystals: {
+                wood: {
+                    name: "今日幸运·绿幽灵",
+                    element: "木",
+                    color: "#7BA05B",
+                    effect: "今日事业运提升、贵人相助、思维清晰",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/336e299034a89a8c38a3b589ea786d4c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=Pfp0k2FgVEC5Jm6c5ECb5KZAmVc%3D"
+                },
+                fire: {
+                    name: "今日幸运·红玛瑙",
+                    element: "火",
+                    color: "#D36582",
+                    effect: "今日人际关系和谐、魅力提升、创意爆发",
+                    image: "https://p11-doubao-search-sign.byteimg.com/labis/65639679ebcd63d62c24aacce691fd9b~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=rAPoBb%2FCHtfqxJyHIJX4FPuljWs%3D"
+                },
+                earth: {
+                    name: "今日幸运·黄水晶",
+                    element: "土",
+                    color: "#D3B17D",
+                    effect: "今日财运亨通、稳重踏实、身体健康",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/4fc2d82f45a3dc6ec17052b06ec82bad~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=8KYHxgR2mOFKlliP1VrOhykKsHI%3D"
+                },
+                metal: {
+                    name: "今日幸运·白水晶",
+                    element: "金",
+                    color: "#70A9A1",
+                    effect: "今日决策果断、财运顺畅、头脑清晰",
+                    image: "https://p26-doubao-search-sign.byteimg.com/labis/1d986eac87c6ec6cfd82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=ZhEXU5WKtILrsOQEzpiPSZLkM%2F8%3D"
+                },
+                water: {
+                    name: "今日幸运·海蓝宝",
+                    element: "水",
+                    color: "#5C80BC",
+                    effect: "今日智慧提升、沟通顺畅、情绪稳定",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=roeolHELAy6P8LxkRq5oQvtyRG8%3D"
+                }
+            },
+            
+            // 职场加持能量串
+            careerCrystals: {
+                wood: {
+                    name: "职场加持·绿幽灵",
+                    element: "木",
+                    color: "#7BA05B",
+                    effect: "职场贵人相助、事业晋升、团队协作",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/336e299034a89a8c38a3b589ea786d4c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=Pfp0k2FgVEC5Jm6c5ECb5KZAmVc%3D"
+                },
+                fire: {
+                    name: "职场加持·红玛瑙",
+                    element: "火",
+                    color: "#D36582",
+                    effect: "职场人际关系、领导赏识、演讲表达",
+                    image: "https://p11-doubao-search-sign.byteimg.com/labis/65639679ebcd63d62c24aacce691fd9b~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=rAPoBb%2FCHtfqxJyHIJX4FPuljWs%3D"
+                },
+                earth: {
+                    name: "职场加持·黄水晶",
+                    element: "土",
+                    color: "#D3B17D",
+                    effect: "职场财运稳定、工作踏实、抗压能力",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/4fc2d82f45a3dc6ec17052b06ec82bad~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=8KYHxgR2mOFKlliP1VrOhykKsHI%3D"
+                },
+                metal: {
+                    name: "职场加持·白水晶",
+                    element: "金",
+                    color: "#70A9A1",
+                    effect: "职场决策能力、专业技能、权威感",
+                    image: "https://p26-doubao-search-sign.byteimg.com/labis/1d986eac87c6ec6cfd82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=ZhEXU5WKtILrsOQEzpiPSZLkM%2F8%3D"
+                },
+                water: {
+                    name: "职场加持·海蓝宝",
+                    element: "水",
+                    color: "#5C80BC",
+                    effect: "职场沟通能力、客户关系、思维敏捷",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=roeolHELAy6P8LxkRq5oQvtyRG8%3D"
+                }
+            },
+            
+            // 滴流水晶
+            drops: [
+                {
+                    id: 1,
+                    name: "招财聚财·守财库",
+                    crystal: "黄水晶/蜜蜡",
+                    element: "土",
+                    icon: "fa-money",
+                    effect: "正财偏财放大、锁财库、防漏财、生意稳",
+                    suitable: "所有主串尤喜土/金者",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/4fc2d82f45a3dc6ec17052b06ec82bad~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=8KYHxgR2mOFKlliP1VrOhykKsHI%3D"
+                },
+                {
+                    id: 2,
+                    name: "事业贵人·破小人",
+                    crystal: "绿幽灵/青金石",
+                    element: "木",
+                    icon: "fa-briefcase",
+                    effect: "招贵人、挡口舌、升职加薪、突破瓶颈",
+                    suitable: "木火日主、事业上升期",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/336e299034a89a8c38a3b589ea786d4c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=Pfp0k2FgVEC5Jm6c5ECb5KZAmVc%3D"
+                },
+                {
+                    id: 3,
+                    name: "正缘桃花·锁良缘",
+                    crystal: "粉晶/月光石",
+                    element: "火",
+                    icon: "fa-heart",
+                    effect: "引正缘、断烂桃花、稳固感情、提升魅力",
+                    suitable: "火木日主、情感不稳/单身",
+                    image: "https://p11-doubao-search-sign.byteimg.com/labis/65639679ebcd63d62c24aacce691fd9b~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=rAPoBb%2FCHtfqxJyHIJX4FPuljWs%3D"
+                },
+                {
+                    id: 4,
+                    name: "情绪安神·止内耗",
+                    crystal: "海蓝宝/月光石",
+                    element: "水",
+                    icon: "fa-moon-o",
+                    effect: "平复情绪、止内耗、安神助眠、净化负能量",
+                    suitable: "水日主、焦虑/敏感/失眠",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=roeolHELAy6P8LxkRq5oQvtyRG8%3D"
+                },
+                {
+                    id: 5,
+                    name: "化太岁·挡煞护身",
+                    crystal: "朱砂/黑曜石",
+                    element: "土",
+                    icon: "fa-shield",
+                    effect: "挡灾化煞、辟邪护身、出行平安、稳气场",
+                    suitable: "全体通用、本命年/冲煞/出行多",
+                    image: "https://p26-doubao-search-sign.byteimg.com/labis/image/461d10ea17b7baa4036cde82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=pEn%2B4Yggtc6qgWfxJNzVfimmU7I%3D"
+                },
+                {
+                    id: 6,
+                    name: "学业开智·稳考试",
+                    crystal: "白水晶/紫水晶",
+                    element: "金",
+                    icon: "fa-graduation-cap",
+                    effect: "专注力↑、思路清晰、考运稳、临场发挥好",
+                    suitable: "金火日主、学生/备考/脑力工作",
+                    image: "https://p26-doubao-search-sign.byteimg.com/labis/1d986eac87c6ec6cfd82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=ZhEXU5WKtILrsOQEzpiPSZLkM%2F8%3D"
+                },
+                {
+                    id: 7,
+                    name: "人脉人缘·社交气场",
+                    crystal: "蓝纹石/白玛瑙",
+                    element: "水",
+                    icon: "fa-users",
+                    effect: "招人喜欢、社交圆滑、化解人际矛盾、气场提升",
+                    suitable: "水金日主、销售/商务/社交多",
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=roeolHELAy6P8LxkRq5oQvtyRG8%3D"
+                },
+                {
+                    id: 8,
+                    name: "身心康养·助睡眠",
+                    crystal: "茶晶/和田玉",
+                    element: "土",
+                    icon: "fa-leaf",
+                    effect: "调和身心、舒缓疲惫、改善睡眠、修复负能量",
+                    suitable: "土水日主、疲劳/失眠/压力大",
+                    image: "https://p26-doubao-search-sign.byteimg.com/labis/image/461d10ea17b7baa4036cde82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=pEn%2B4Yggtc6qgWfxJNzVfimmU7I%3D"
+                }
+            ]
+        };
+        
+        // 五行对应颜色
+        const elementColors = {
+            wood: "#7BA05B",
+            fire: "#D36582",
+            earth: "#D3B17D",
+            metal: "#70A9A1",
+            water: "#5C80BC"
+        };
+        
+        // 五行元素中文名称
+        const elementNames = {
+            wood: "木",
+            fire: "火",
+            earth: "土",
+            metal: "金",
+            water: "水"
+        };
+        
+        // 初始化年份、月份、日期选择器
+        function initDateSelectors() {
+            const yearSelect = document.getElementById('year');
+            const monthSelect = document.getElementById('month');
+            const daySelect = document.getElementById('day');
+            
+            // 生成年份选项 (1950-2026)
+            for (let year = 2026; year >= 1950; year--) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearSelect.appendChild(option);
+            }
+            
+            // 生成月份选项
+            for (let month = 1; month <= 12; month++) {
+                const option = document.createElement('option');
+                option.value = month;
+                option.textContent = month;
+                monthSelect.appendChild(option);
+            }
+            
+            // 监听月份变化，更新日期选项
+            function updateDays() {
+                const year = parseInt(yearSelect.value);
+                const month = parseInt(monthSelect.value);
+                
+                // 清空现有日期选项
+                daySelect.innerHTML = '<option value="">选择</option>';
+                
+                if (!year || !month) return;
+                
+                // 计算当月天数
+                const daysInMonth = new Date(year, month, 0).getDate();
+                
+                // 生成日期选项
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const option = document.createElement('option');
+                    option.value = day;
+                    option.textContent = day;
+                    daySelect.appendChild(option);
+                }
+            }
+            
+            yearSelect.addEventListener('change', updateDays);
+            monthSelect.addEventListener('change', updateDays);
+        }
+        
+        // 根据出生日期和性别计算五行属性
+        function calculateElements(year, month, day, hour, gender) {
+            // 这里使用简化的计算方法，实际八字计算非常复杂
+            // 基于出生日期的数字特征进行简化计算
+            
+            // 计算总和
+            const sum = year + month + day + parseInt(hour.split('-')[0]);
+            
+            // 根据总和确定日主五行
+            const elements = ['wood', 'fire', 'earth', 'metal', 'water'];
+            const dayMasterIndex = sum % 5;
+            const dayMaster = elements[dayMasterIndex];
+            
+            // 计算五行强弱 (随机生成，实际应根据八字详细分析)
+            const strengths = {
+                wood: Math.random() * 0.7 + 0.15, // 0.15-0.85 之间的随机值
+                fire: Math.random() * 0.7 + 0.15,
+                earth: Math.random() * 0.7 + 0.15,
+                metal: Math.random() * 0.7 + 0.15,
+                water: Math.random() * 0.7 + 0.15
+            };
+            
+            // 调整日主五行的强度
+            strengths[dayMaster] = Math.min(0.9, strengths[dayMaster] * 1.3);
+            
+            // 确定喜用神 (简化版：选择最弱的五行)
+            let weakestElement = 'wood';
+            let weakestValue = strengths.wood;
+            
+            for (const [element, value] of Object.entries(strengths)) {
+                if (value < weakestValue) {
+                    weakestValue = value;
+                    weakestElement = element;
+                }
+            }
+            
+            // 确定身强弱
+            const isStrong = strengths[dayMaster] > 0.6;
+            
+            // 根据性别微调
+            if (gender === 'male') {
+                strengths.fire = Math.min(0.9, strengths.fire * 1.1);
+            } else {
+                strengths.water = Math.min(0.9, strengths.water * 1.1);
+            }
+            
+            return {
+                dayMaster,
+                strengths,
+                favoriteElement: weakestElement,
+                isStrong
+            };
+        }
+        
+        // 生成主串结果
+        function generateMainCrystal(result) {
+            const { dayMaster, favoriteElement, isStrong } = result;
+            
+            // 确定主串 (简化版：使用日主五行作为主串)
+            const mainCrystal = crystalData.mainCrystals[dayMaster];
+            
+            // 确定隔珠 (使用喜用神五行)
+            let spacerCrystal = '';
+            let mainCrystalEffect = mainCrystal.effect;
+            
+            if (favoriteElement !== dayMaster) {
+                spacerCrystal = crystalData.mainCrystals[favoriteElement].name.split('主串')[0];
+                mainCrystalEffect += ` + ${crystalData.mainCrystals[favoriteElement].effect.split('、')[0]}`;
+            }
+            
+            // 更新UI
+            document.getElementById('main-crystal-name').textContent = spacerCrystal 
+                ? `${mainCrystal.name} + ${spacerCrystal}隔珠` 
+                : mainCrystal.name;
+            
+            document.getElementById('element-info').textContent = 
+                `五行：日主${elementNames[dayMaster]}、${isStrong ? '身强' : '身弱'}、喜用${elementNames[favoriteElement]}`;
+            
+            document.getElementById('main-crystal-effect').textContent = 
+                `主串功效：${mainCrystalEffect}`;
+            
+            document.getElementById('main-crystal-image').src = mainCrystal.image;
+            
+            // 设置元素图标
+            const elementIcon = document.getElementById('element-icon');
+            elementIcon.style.backgroundColor = mainCrystal.color;
+            elementIcon.innerHTML = `<i class="fa fa-${getElementIcon(dayMaster)} text-white"></i>`;
+            
+            return {
+                mainCrystal,
+                spacerCrystal
+            };
+        }
+        
+        // 获取五行对应的图标
+        function getElementIcon(element) {
+            const icons = {
+                wood: 'leaf',
+                fire: 'fire',
+                earth: 'tree',
+                metal: 'diamond',
+                water: 'tint'
+            };
+            return icons[element] || 'circle';
+        }
+        
+        // 生成五行分析图表
+        function generateElementChart(strengths) {
+            const ctx = document.getElementById('element-chart').getContext('2d');
+            
+            // 销毁现有图表（如果存在）
+            if (window.elementChart) {
+                window.elementChart.destroy();
+            }
+            
+            // 创建新图表
+            window.elementChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['木', '火', '土', '金', '水'],
+                    datasets: [{
+                        label: '五行强度',
+                        data: [
+                            strengths.wood,
+                            strengths.fire,
+                            strengths.earth,
+                            strengths.metal,
+                            strengths.water
+                        ],
+                        backgroundColor: 'rgba(255, 127, 0, 0.1)',
+                        borderColor: 'rgba(255, 127, 0, 0.3)',
+                        pointBackgroundColor: [
+                            elementColors.wood,
+                            elementColors.fire,
+                            elementColors.earth,
+                            elementColors.metal,
+                            elementColors.water
+                        ],
+                        pointBorderColor: '#FF7F00',
+                        pointHoverBackgroundColor: '#FF7F00',
+                        pointHoverBorderColor: [
+                            elementColors.wood,
+                            elementColors.fire,
+                            elementColors.earth,
+                            elementColors.metal,
+                            elementColors.water
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 1,
+                            ticks: {
+                                display: false
+                            },
+                            grid: {
+                                color: 'rgba(255, 127, 0, 0.1)'
+                            },
+                            angleLines: {
+                                color: 'rgba(255, 127, 0, 0.2)'
+                            },
+                            pointLabels: {
+                                color: 'rgba(255, 127, 0, 0.7)',
+                                font: {
+                                    family: 'Cormorant Garamond, serif',
+                                    size: 14
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    maintainAspectRatio: false
+                }
+            });
+        }
+        
+        // 生成今日幸运能量串
+        function generateDailyCrystal(dayMaster) {
+            const dailyCrystal = crystalData.dailyCrystals[dayMaster];
+            
+            // 更新UI
+            document.getElementById('daily-crystal-name').textContent = dailyCrystal.name;
+            document.getElementById('daily-element-info').textContent = `五行属性：${dailyCrystal.element} · 今日幸运加持`;
+            document.getElementById('daily-crystal-effect').textContent = `今日功效：${dailyCrystal.effect}`;
+            document.getElementById('daily-crystal-image').src = dailyCrystal.image;
+            
+            // 设置元素图标
+            const dailyElementIcon = document.getElementById('daily-element-icon');
+            dailyElementIcon.style.backgroundColor = dailyCrystal.color;
+            dailyElementIcon.innerHTML = `<i class="fa fa-${getElementIcon(dayMaster)} text-white"></i>`;
+        }
+        
+        // 生成职场加持能量串
+        function generateCareerCrystal(dayMaster) {
+            const careerCrystal = crystalData.careerCrystals[dayMaster];
+            
+            // 更新UI
+            document.getElementById('career-crystal-name').textContent = careerCrystal.name;
+            document.getElementById('career-element-info').textContent = `五行属性：${careerCrystal.element} · 职场能量加持`;
+            document.getElementById('career-crystal-effect').textContent = `职场功效：${careerCrystal.effect}`;
+            document.getElementById('career-crystal-image').src = careerCrystal.image;
+            
+            // 设置元素图标
+            const careerElementIcon = document.getElementById('career-element-icon');
+            careerElementIcon.style.backgroundColor = careerCrystal.color;
+            careerElementIcon.innerHTML = `<i class="fa fa-${getElementIcon(dayMaster)} text-white"></i>`;
+        }
+        
+        // 生成能量滴流选项
+        function generateEnergyDrops(dayMaster) {
+            const dropsContainer = document.getElementById('energy-drops-container');
+            dropsContainer.innerHTML = '';
+            
+            crystalData.drops.forEach(drop => {
+                const dropElement = document.createElement('div');
+                dropElement.className = 'magic-card rounded-xl p-4 cursor-pointer transition-all transform hover:scale-105 hover-effect pentagram';
+                
+                // 确定是否为最佳推荐
+                const isBest = drop.element === dayMaster;
+                
+                dropElement.innerHTML = `
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-24 h-24 rounded-lg overflow-hidden mb-4 magic-circle relative">
+                            <img src="${drop.image}" alt="${drop.name}" class="w-full h-full object-cover image-hover-effect">
+                            <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-lg"></div>
+                        </div>
+                        <div class="w-full">
+                            <div class="flex items-center justify-center mb-2 flex-wrap gap-1">
+                                <h3 class="font-medium text-orange/90 font-magic">${drop.name}</h3>
+                                ${isBest ? '<span class="ml-2 text-xs bg-orange/10 text-orange px-2 py-0.5 rounded-full orange-border">神秘推荐</span>' : ''}
+                            </div>
+                            <p class="text-xs text-orange/60 mb-2 font-magic">${drop.crystal} · <i class="fa ${drop.icon}"></i></p>
+                            <p class="text-xs text-orange/700 mb-3 font-magic">${drop.effect}</p>
+                            <div class="text-xs text-orange/50 border-t border-orange/20 pt-2 font-magic">
+                                适配：${drop.suitable}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // 添加点击事件
+                dropElement.addEventListener('click', () => {
+                    alert(`你选择了【${drop.name}】神秘能量滴流！\n\n此滴流适合：${drop.suitable}\n\n将与你的本命主串产生神秘共振，${drop.effect.split('、')[0]}的力量将获得神秘增幅！`);
+                });
+                
+                dropsContainer.appendChild(dropElement);
+            });
+        }
+        
+        // 表单提交处理
+        document.getElementById('birth-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const year = parseInt(document.getElementById('year').value);
+            const month = parseInt(document.getElementById('month').value);
+            const day = parseInt(document.getElementById('day').value);
+            const hour = document.getElementById('hour').value;
+            const gender = document.querySelector('input[name="gender"]:checked')?.value;
+            
+            // 验证表单
+            if (!year || !month || !day || !hour || !gender) {
+                alert('请完整填写所有神秘信息');
+                return;
+            }
+            
+            // 计算五行属性
+            const result = calculateElements(year, month, day, hour, gender);
+            
+            // 生成主串结果
+            generateMainCrystal(result);
+            
+            // 生成五行分析图表
+            generateElementChart(result.strengths);
+            
+            // 生成今日幸运能量串
+            generateDailyCrystal(result.dayMaster);
+            
+            // 生成职场加持能量串
+            generateCareerCrystal(result.dayMaster);
+            
+            // 生成能量滴流选项
+            generateEnergyDrops(result.dayMaster);
+            
+            // 显示结果区域
+            document.getElementById('input-section').classList.add('mb-16');
+            document.getElementById('result-section').classList.remove('hidden');
+            
+            // 滚动到结果区域
+            document.getElementById('result-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initDateSelectors();
+        });
+
+        // 滚动视差效果 - 仅对特定元素应用，避免影响整体布局
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            
+            // 为背景魔法阵添加视差效果
+            const magicBg = document.querySelector('.fixed.inset-0.z-0');
+            if (magicBg) {
+                magicBg.style.transform = `translateY(${scrollY * 0.1}px)`;
+            }
+            
+            // 为标题区域添加微妙的视差
+            const header = document.querySelector('header');
+            if (header) {
+                const headerOpacity = Math.max(0, 1 - scrollY / 500);
+                header.style.opacity = headerOpacity;
+            }
+        });
+    </script>
+</body>
+</html>
