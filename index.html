@@ -28,7 +28,8 @@
                         'dark-purple': '#081420',
                         'orange': '#FF7F00',
                         'orange-light': '#FF9E40',
-                        'orange-dark': '#CC6600'
+                        'orange-dark': '#CC6600',
+                        'gold': '#FFD700'
                     },
                     fontFamily: {
                         sans: ['SimHei', 'Microsoft YaHei', 'sans-serif'],
@@ -567,14 +568,8 @@
                                 <div class="mt-6">
                                     <h4 class="text-lg text-orange/80 mb-3 font-magic">今日幸运指数</h4>
                                     <div class="flex items-center gap-3">
-                                        <div class="flex gap-1">
-                                            <span class="text-xl text-orange/80">★</span>
-                                            <span class="text-xl text-orange/80">★</span>
-                                            <span class="text-xl text-orange/80">★</span>
-                                            <span class="text-xl text-orange/80">★</span>
-                                            <span class="text-xl text-orange/30">★</span>
-                                        </div>
-                                        <span class="text-sm text-orange/60 font-magic">80%</span>
+                                        <div id="lucky-stars" class="flex gap-1"></div>
+                                        <span id="lucky-percentage" class="text-sm text-orange/60 font-magic"></span>
                                     </div>
                                 </div>
                             </div>
@@ -855,7 +850,7 @@
                     icon: "fa-money",
                     effect: "正财偏财放大、锁财库、防漏财、生意稳",
                     suitable: "所有主串尤喜土/金者",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/4fc2d82f45a3dc6ec17052b06ec82bad~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=8KYHxgR2mOFKlliP1VrOhykKsHI%3D"
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/4fc2d82f45a3dc6ec17052b06ec82bad~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32"
                 },
                 {
                     id: 2,
@@ -865,7 +860,7 @@
                     icon: "fa-briefcase",
                     effect: "招贵人、挡口舌、升职加薪、突破瓶颈",
                     suitable: "木火日主、事业上升期",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/336e299034a89a8c38a3b589ea786d4c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=Pfp0k2FgVEC5Jm6c5ECb5KZAmVc%3D"
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/336e299034a89a8c38a3b589ea786d4c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32"
                 },
                 {
                     id: 3,
@@ -875,7 +870,7 @@
                     icon: "fa-heart",
                     effect: "引正缘、断烂桃花、稳固感情、提升魅力",
                     suitable: "火木日主、情感不稳/单身",
-                    image: "https://p11-doubao-search-sign.byteimg.com/labis/65639679ebcd63d62c24aacce691fd9b~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=rAPoBb%2FCHtfqxJyHIJX4FPuljWs%3D"
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/9f5c5b8c0e8a4d6e7f3a2b1c9d8e7f6a~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32"
                 },
                 {
                     id: 4,
@@ -885,7 +880,7 @@
                     icon: "fa-moon-o",
                     effect: "平复情绪、止内耗、安神助眠、净化负能量",
                     suitable: "水日主、焦虑/敏感/失眠",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=roeolHELAy6P8LxkRq5oQvtyRG8%3D"
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32"
                 },
                 {
                     id: 5,
@@ -895,7 +890,7 @@
                     icon: "fa-shield",
                     effect: "挡灾化煞、辟邪护身、出行平安、稳气场",
                     suitable: "全体通用、本命年/冲煞/出行多",
-                    image: "https://p26-doubao-search-sign.byteimg.com/labis/image/461d10ea17b7baa4036cde82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=pEn%2B4Yggtc6qgWfxJNzVfimmU7I%3D"
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/4e5d6c7b8a9f0e1d2c3b4a5f6e7d8c9b~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32"
                 },
                 {
                     id: 6,
@@ -905,7 +900,7 @@
                     icon: "fa-graduation-cap",
                     effect: "专注力↑、思路清晰、考运稳、临场发挥好",
                     suitable: "金火日主、学生/备考/脑力工作",
-                    image: "https://p26-doubao-search-sign.byteimg.com/labis/1d986eac87c6ec6cfd82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=ZhEXU5WKtILrsOQEzpiPSZLkM%2F8%3D"
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/1d986eac87c6ec6cfd82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32"
                 },
                 {
                     id: 7,
@@ -915,7 +910,7 @@
                     icon: "fa-users",
                     effect: "招人喜欢、社交圆滑、化解人际矛盾、气场提升",
                     suitable: "水金日主、销售/商务/社交多",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=roeolHELAy6P8LxkRq5oQvtyRG8%3D"
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32"
                 },
                 {
                     id: 8,
@@ -925,7 +920,7 @@
                     icon: "fa-leaf",
                     effect: "调和身心、舒缓疲惫、改善睡眠、修复负能量",
                     suitable: "土水日主、疲劳/失眠/压力大",
-                    image: "https://p26-doubao-search-sign.byteimg.com/labis/image/461d10ea17b7baa4036cde82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=pEn%2B4Yggtc6qgWfxJNzVfimmU7I%3D"
+                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32"
                 }
             ]
         };
@@ -1192,6 +1187,25 @@
             const dailyElementIcon = document.getElementById('daily-element-icon');
             dailyElementIcon.style.backgroundColor = dailyCrystal.color;
             dailyElementIcon.innerHTML = `<i class="fa fa-${getElementIcon(dayMaster)} text-white"></i>`;
+            
+            // 动态计算幸运指数（基于日期）
+            const today = new Date();
+            const luckyBase = (today.getDate() + today.getMonth()) % 20 + 70; // 70-89%
+            const fullStars = Math.floor(luckyBase / 20); // 3-4 颗满星
+            const hasHalfStar = luckyBase % 20 >= 10; // 是否半星
+            
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+                if (i < fullStars) {
+                    starsHtml += '<span class="text-xl text-orange">★</span>';
+                } else if (i === fullStars && hasHalfStar) {
+                    starsHtml += '<span class="text-xl text-orange/50">★</span>';
+                } else {
+                    starsHtml += '<span class="text-xl text-orange/30">★</span>';
+                }
+            }
+            document.getElementById('lucky-stars').innerHTML = starsHtml;
+            document.getElementById('lucky-percentage').textContent = `${luckyBase}%`;
         }
         
         // 生成职场加持能量串
