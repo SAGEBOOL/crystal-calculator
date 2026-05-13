@@ -404,18 +404,24 @@
                 opacity: 0;
             }
             .purple-glow-title::before {
-                width: 6px; height: 6px;
+                width: 0.375em; height: 0.375em;
                 background: linear-gradient(135deg, #a855f7, #3b82f6);
                 box-shadow: 0 0 8px #a855f7, 0 0 16px #60a5fa;
-                top: -4px; left: 15%;
+                top: -0.25em; left: 12%;
                 animation: particleFloat1 3s ease-in-out infinite;
             }
             .purple-glow-title::after {
-                width: 4px; height: 4px;
+                width: 0.25em; height: 0.25em;
                 background: linear-gradient(135deg, #3b82f6, #c084fc);
                 box-shadow: 0 0 6px #3b82f6, 0 0 12px #a855f7;
-                bottom: -2px; right: 20%;
+                bottom: -0.125em; right: 15%;
                 animation: particleFloat2 2.5s ease-in-out infinite 0.5s;
+            }
+            @media (max-width: 640px) {
+                .purple-glow-title::before,
+                .purple-glow-title::after {
+                    display: none;
+                }
             }
             @keyframes orangeGlowPulse {
                 0% { text-shadow: 0 0 8px rgba(255, 158, 64, 0.4), 0 0 16px rgba(255, 127, 0, 0.2); }
@@ -467,7 +473,7 @@
             </div>
             
             <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight font-magic purple-glow-title">水晶能量计算器</h1>
-            <p class="text-orange/700 max-w-2xl mx-auto text-lg font-magic text-center">探索水晶与五行的奥秘，发现专属于你的能量平衡之道</p>
+            <p class="max-w-2xl mx-auto text-[0.8rem] md:text-sm font-magic text-center" style="font-family: 'FangSong', 'STFangSong', '仿宋', serif; color: rgba(255,158,64,0.7);">探索水晶与五行的奥秘，发现专属于你的能量平衡之道</p>
         </header>
 
         <!-- 主要内容区域 -->
