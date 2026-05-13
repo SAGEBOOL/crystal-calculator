@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免责声明 | Disclaimer - 水晶能量计算器</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JSHBHNFDT3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JSHBHNFDT3');
+    </script>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#e2e8f0',
+                        'orange': '#FF7F00',
+                        'gold': '#FFD700',
+                        'dark-blue': '#0A1929',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .main-gradient {
+                background: linear-gradient(135deg, #0A1929 0%, #0D2137 100%);
+            }
+            .orange-border {
+                border-color: rgba(255, 127, 0, 0.3);
+            }
+            .content-section {
+                background: rgba(13, 33, 55, 0.6);
+                border: 1px solid rgba(255, 127, 0, 0.15);
+                border-radius: 12px;
+            }
+            .warning-box {
+                background: rgba(255, 127, 0, 0.08);
+                border-left: 4px solid #FF7F00;
+                border-radius: 0 8px 8px 0;
+            }
+        }
+    </style>
+</head>
+<body class="main-gradient text-primary min-h-screen">
+    <!-- 顶部导航 -->
+    <nav class="py-4 px-4 border-b border-orange/20">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="text-orange font-bold text-lg hover:text-gold transition-colors">← 返回首页</a>
+            <button id="lang-toggle" onclick="toggleLang()" class="px-4 py-2 bg-orange/10 border border-orange/30 text-orange rounded-lg text-sm hover:bg-orange/20 transition-colors">
+                切换英文 | EN
+            </button>
+        </div>
+    </nav>
+
+    <!-- 中文版本 -->
+    <div id="zh-content" class="max-w-4xl mx-auto px-4 py-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-orange mb-2">免责声明</h1>
+        <p class="text-orange/60 text-sm mb-10">生效日期：2026年5月13日</p>
+
+        <div class="warning-box p-5 mb-10">
+            <p class="text-orange/90 font-bold text-lg mb-2">⚠️ 重要提示</p>
+            <p class="text-primary/80 leading-relaxed">
+                本网站所有内容仅供<b>娱乐参考</b>之用，不构成任何专业建议。使用本网站即表示您已阅读并同意本声明的全部内容。
+            </p>
+        </div>
+
+        <div class="space-y-8">
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">一、服务性质</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">
+                    水晶能量计算器是一个基于中国传统文化中"五行学说"的<b>娱乐性工具</b>。本网站提供的所有分析结果、能量串推荐、五行图谱等内容，均属于文化娱乐范畴，不具任何科学依据或医学效力。
+                </p>
+                <p class="text-primary/80 leading-relaxed">
+                    本网站不构成算命、占卜、医疗诊断或任何专业咨询服务。如果您有健康、心理或财务方面的问题，请咨询合格的持牌专业人士。
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">二、无专业建议</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">
+                    本网站提供的任何信息、建议或推荐，均<b>不构成专业建议</b>（包括但不限于医疗、法律、财务、投资或心理建议）。
+                </p>
+                <p class="text-primary/80 leading-relaxed">
+                    对于因依赖本网站内容而做出的任何决定或行动，本网站及其运营者概不负责。
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">三、水晶能量说明</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">
+                    本网站中关于水晶能量、五行相生、能量磁场等描述，均源自民间传统文化和民俗信仰，<b>未经科学验证</b>，仅供文化兴趣与娱乐参考。
+                </p>
+                <p class="text-primary/80 leading-relaxed">
+                    水晶饰品为天然矿物制品，请理性消费。如有皮肤敏感或健康问题，请在使用前咨询专业医师。
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">四、计算结果</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">
+                    本网站的"五行能量分析"结果由前端 JavaScript 算法根据您输入的出生信息计算得出，<b>仅供娱乐参考，不代表真实命运或性格判断</b>。
+                </p>
+                <p class="text-primary/80 leading-relaxed">
+                    八字命理本身是中国传统文化的一部分，具有哲学和文化研究价值，但本网站将其以娱乐化方式呈现，不应作为人生重大决策的依据。
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">五、外部链接</h2>
+                <p class="text-primary/80 leading-relaxed">
+                    本网站可能包含指向第三方网站的链接（如"人生运势K线图"）。这些链接仅为方便用户而提供，本网站不对第三方网站的内容、隐私政策或行为承担任何责任。访问外部链接即表示您同意接受该第三方网站的条款。
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">六、版权声明</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">
+                    本网站的所有内容（包括但不限于文字、图片、代码、设计），其知识产权归本网站运营者所有，受著作权法保护。
+                </p>
+                <p class="text-primary/80 leading-relaxed">
+                    未经书面授权，不得以任何形式复制、转载、分发本网站内容。欢迎分享本网站链接，但不得篡改内容或移除署名。
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">七、免责范围</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">在法律允许的最大范围内，本网站运营者明确声明不对以下情况承担责任：</p>
+                <ul class="text-primary/80 leading-relaxed list-disc list-inside space-y-1">
+                    <li>因使用或无法使用本网站而导致的任何直接、间接、附带或惩罚性损害</li>
+                    <li>本网站内容中的任何错误、遗漏或 inaccuracies</li>
+                    <li>第三方通过本网站链接所实施的行为</li>
+                    <li>因不可抗力（如网络故障、服务器中断）导致的服务中断</li>
+                </ul>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">八、声明更新</h2>
+                <p class="text-primary/80 leading-relaxed">
+                    我们可能会不时更新本免责声明。任何变更将在本页面上公布，并注明生效日期。继续使用本网站即表示您接受更新后的声明。
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">九、联系我们</h2>
+                <p class="text-primary/80 leading-relaxed">
+                    如果您对本免责声明有任何疑问，请通过以下方式联系我们：
+                </p>
+                <ul class="text-primary/80 leading-relaxed list-disc list-inside space-y-1 mt-3">
+                    <li>邮箱：<a href="mailto:dsart99@126.com" class="text-orange hover:text-gold underline">dsart99@126.com</a></li>
+                    <li>微信号：SAGEBOOK</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <a href="index.html" class="inline-block px-8 py-3 bg-orange/10 border border-orange/40 text-orange rounded-lg hover:bg-orange/20 transition-colors">
+                返回首页
+            </a>
+        </div>
+    </div>
+
+    <!-- 英文版本 -->
+    <div id="en-content" class="max-w-4xl mx-auto px-4 py-12 hidden">
+        <h1 class="text-3xl md:text-4xl font-bold text-orange mb-2">Disclaimer</h1>
+        <p class="text-orange/60 text-sm mb-10">Effective Date: May 13, 2026</p>
+
+        <div class="warning-box p-5 mb-10">
+            <p class="text-orange/90 font-bold text-lg mb-2">⚠️ Important Notice</p>
+            <p class="text-primary/80 leading-relaxed">
+                All content on this Site is for <b>entertainment and reference purposes only</b> and does not constitute any form of professional advice. By using this Site, you acknowledge that you have read and agree to all terms of this Disclaimer.
+            </p>
+        </div>
+
+        <div class="space-y-8">
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">1. Nature of Service</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">
+                    Crystal Energy Calculator is an <b>entertainment tool</b> based on the Chinese traditional "Wu Xing" (Five Elements) theory. All analysis results, crystal recommendations, and energy charts provided by this Site belong to the category of cultural entertainment and have no scientific basis or medical efficacy.
+                </p>
+                <p class="text-primary/80 leading-relaxed">
+                    This Site does not constitute fortune-telling, divination, medical diagnosis, or any form of professional consulting service. If you have health, psychological, or financial concerns, please consult a qualified licensed professional.
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">2. No Professional Advice</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">
+                    Any information, suggestions, or recommendations provided on this Site <b>do not constitute professional advice</b> (including but not limited to medical, legal, financial, investment, or psychological advice).
+                </p>
+                <p class="text-primary/80 leading-relaxed">
+                    The Site and its operators shall not be held responsible for any decisions or actions taken based on reliance on the content of this Site.
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">3. Crystal Energy Disclaimer</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">
+                    Descriptions on this Site regarding crystal energy, Wu Xing interactions, and energy fields are derived from folk traditions and cultural beliefs. They are <b>not scientifically verified</b> and are provided for cultural interest and entertainment reference only.
+                </p>
+                <p class="text-primary/80 leading-relaxed">
+                    Crystal products are natural mineral items. Please consume responsibly. If you have skin sensitivities or health concerns, please consult a professional physician before use.
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">4. Calculation Results</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">
+                    The "Wu Xing Energy Analysis" results on this Site are calculated by client-side JavaScript algorithms based on the birth information you provide. <b>These are for entertainment reference only and do not represent actual destiny or personality judgments.</b>
+                </p>
+                <p class="text-primary/80 leading-relaxed">
+                    Ba Zi (Eight Characters) is part of traditional Chinese culture with philosophical and cultural research value. However, this Site presents it in an entertainment format and it should not be used as the basis for major life decisions.
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">5. External Links</h2>
+                <p class="text-primary/80 leading-relaxed">
+                    This Site may contain links to third-party websites (e.g., "Life Fortune K-Line Chart"). These links are provided for your convenience only. This Site assumes no responsibility for the content, privacy policies, or actions of third-party websites. Accessing external links indicates your agreement to accept the terms of those third-party sites.
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">6. Copyright Notice</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">
+                    All content on this Site (including but not limited to text, images, code, and design) is the intellectual property of the Site operator and is protected by copyright law.
+                </p>
+                <p class="text-primary/80 leading-relaxed">
+                    No content from this Site may be reproduced, reprinted, or distributed in any form without written authorization. You are welcome to share links to this Site, but may not alter the content or remove attribution.
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">7. Limitation of Liability</h2>
+                <p class="text-primary/80 leading-relaxed mb-3">To the maximum extent permitted by law, the Site operator expressly disclaims liability for:</p>
+                <ul class="text-primary/80 leading-relaxed list-disc list-inside space-y-1">
+                    <li>Any direct, indirect, incidental, or punitive damages arising from the use or inability to use this Site</li>
+                    <li>Any errors, omissions, or inaccuracies in the content of this Site</li>
+                    <li>Actions taken by third parties through links on this Site</li>
+                    <li>Service interruptions due to force majeure (e.g., network failure, server outage)</li>
+                </ul>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">8. Updates to This Disclaimer</h2>
+                <p class="text-primary/80 leading-relaxed">
+                    We may update this Disclaimer from time to time. Any changes will be posted on this page with an updated effective date. Continued use of this Site constitutes acceptance of the updated Disclaimer.
+                </p>
+            </div>
+
+            <div class="content-section p-6 md:p-8">
+                <h2 class="text-xl text-orange/90 font-bold mb-4">9. Contact Us</h2>
+                <p class="text-primary/80 leading-relaxed">
+                    If you have any questions about this Disclaimer, please contact us:
+                </p>
+                <ul class="text-primary/80 leading-relaxed list-disc list-inside space-y-1 mt-3">
+                    <li>Email: <a href="mailto:dsart99@126.com" class="text-orange hover:text-gold underline">dsart99@126.com</a></li>
+                    <li>WeChat: SAGEBOOK</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <a href="index.html" class="inline-block px-8 py-3 bg-orange/10 border border-orange/40 text-orange rounded-lg hover:bg-orange/20 transition-colors">
+                Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleLang() {
+            const zh = document.getElementById('zh-content');
+            const en = document.getElementById('en-content');
+            const btn = document.getElementById('lang-toggle');
+            if (zh.classList.contains('hidden')) {
+                zh.classList.remove('hidden');
+                en.classList.add('hidden');
+                btn.textContent = '切换英文 | EN';
+            } else {
+                zh.classList.add('hidden');
+                en.classList.remove('hidden');
+                btn.textContent = '切换中文 | 中文';
+            }
+        }
+    </script>
+</body>
+</html>
