@@ -1,141 +1,89 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>为什么我们会被水晶吸引？</title>
-    <!-- Tailwind CSS v3 -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: '#0A1929',
-                        'dark-blue': '#0D2137',
-                        orange: '#FF7F00',
-                        'orange-light': '#FF9E40',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #0A1929; font-family: 'SimHei', 'Microsoft YaHei', -apple-system, sans-serif; color: #e2e8f0; padding: 12px; max-width: 680px; margin: 0 auto; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>为什么我们会被水晶吸引？</title>
+<style>
+  * { margin:0; padding:0; box-sizing: border-box; }
+  body { background: #0A1929; font-family: 'SimHei', 'Microsoft YaHei', -apple-system, sans-serif; color: #e2e8f0; padding: 12px; max-width: 680px; margin: 0 auto; }
+  .cover-card {
+    background: linear-gradient(145deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+    border-radius: 16px; padding: 36px 24px 30px; text-align: center; color: #fff; margin-bottom: 14px;
+    box-shadow: 0 12px 40px rgba(255, 127, 0, 0.15);
+    border: 1px solid rgba(255, 127, 0, 0.2);
+  }
+  .cover-img-wrap { display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+  .cover-img { width: 60%; max-width: 320px; border-radius: 12px; display: block; animation: imgSpin 12s linear infinite; transform-origin: center center; }
+  @keyframes imgSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .cover-tag { display: inline-block; background: rgba(255, 127, 0, 0.2); border: 1px solid rgba(255, 127, 0, 0.4); border-radius: 20px; padding: 4px 14px; font-size: 12px; letter-spacing: 1px; margin-bottom: 14px; color: #FF9E40; }
+  .cover-title { font-size: 26px; font-weight: bold; line-height: 1.4; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(255, 127, 0, 0.3); color: #FF9E40; }
+  .cover-sub { font-size: 14px; opacity: 0.85; margin-bottom: 16px; line-height: 1.7; color: #cbd5e1; }
+  .cover-meta { display: flex; justify-content: center; gap: 20px; font-size: 12px; opacity: 0.7; color: #94a3b8; }
+  .card { background: #0D2137; border-radius: 14px; padding: 20px; margin-bottom: 14px; border: 1px solid rgba(255, 127, 0, 0.15); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .section-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .section-title { font-size: 17px; font-weight: bold; color: #FF9E40; }
+  .page-num { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: #fff; flex-shrink: 0; }
+  .page-title { font-size: 16px; font-weight: bold; color: #FF9E40; }
+  .intro-text { font-size: 14.5px; line-height: 1.85; color: #cbd5e1; margin-bottom: 14px; text-align: justify; }
+  .highlight-box { background: linear-gradient(135deg, rgba(255,127,0,0.1) 0%, rgba(255,127,0,0.05) 100%); border-left: 4px solid #FF7F00; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
+  .highlight-box p { font-size: 14px; line-height: 1.8; color: #FF9E40; }
+  .info-card { background: linear-gradient(135deg, rgba(255,159,64,0.1) 0%, rgba(255,127,0,0.05) 100%); border-left: 4px solid #FF9E40; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
+  .info-title { font-size: 14px; font-weight: bold; color: #FF9E40; margin-bottom: 6px; }
+  .info-body { font-size: 13.5px; line-height: 1.75; color: #cbd5e1; }
+  .warn-card { background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(239,68,68,0.05) 100%); border-left: 4px solid #ef4444; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
+  .warn-title { font-size: 14px; font-weight: bold; color: #f87171; margin-bottom: 6px; }
+  .warn-body { font-size: 13.5px; line-height: 1.75; color: #cbd5e1; }
+  .step-list { list-style: none; padding: 0; margin: 0; }
+  .step-item { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: #0A1929; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; line-height: 1.75; color: #cbd5e1; flex: 1; }
+  .table-wrap { overflow-x: auto; margin: 14px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { background: linear-gradient(135deg, #FF7F00, #FF9E40); color: #0A1929; padding: 10px 12px; text-align: left; font-size: 12.5px; }
+  thead th:first-child { border-radius: 8px 0 0 0; }
+  thead th:last-child { border-radius: 0 8px 0 0; }
+  tbody tr:nth-child(even) { background: rgba(255,127,0,0.03); }
+  tbody tr:nth-child(odd) { background: transparent; }
+  tbody td { padding: 9px 12px; color: #cbd5e1; border-bottom: 1px solid rgba(255,127,0,0.1); font-size: 12.5px; line-height: 1.5; }
+  tbody tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  tbody tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+  .tip-card { background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0.05) 100%); border-left: 4px solid #10b981; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
+  .tip-title { font-size: 14px; font-weight: bold; color: #34d399; margin-bottom: 6px; }
+  .tip-body { font-size: 13.5px; line-height: 1.75; color: #cbd5e1; }
+  .divider { text-align: center; color: #FF7F00; font-size: 18px; margin: 18px 0; opacity: 0.5; }
+  .quote-box { background: linear-gradient(135deg, rgba(255,127,0,0.08) 0%, rgba(255,127,0,0.03) 100%); border-radius: 12px; padding: 16px 18px; margin: 14px 0; text-align: center; border: 1px solid rgba(255, 127, 0, 0.1); }
+  .quote-text { font-size: 15px; color: #FF9E40; line-height: 1.8; font-style: italic; }
+  .quote-source { font-size: 12px; color: #FF9E40; margin-top: 8px; opacity: 0.7; }
+  .footer { text-align: center; padding: 24px 16px; color: #64748b; font-size: 13px; line-height: 1.8; }
+  .footer-title { font-size: 15px; font-weight: bold; margin-bottom: 8px; color: #FF9E40; opacity: 1; }
+  .page-section { margin-bottom: 6px; }
+  .sub-title { font-size: 14px; font-weight: bold; color: #FF9E40; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px dashed rgba(255, 127, 0, 0.3); }
+  .text-body { font-size: 14px; line-height: 1.85; color: #cbd5e1; margin-bottom: 12px; text-align: justify; }
+  .dialogue-box { background: rgba(255,127,0,0.05); border-left: 4px solid rgba(255, 127, 0, 0.3); border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 12px 0; }
+  .dialogue-speaker { font-size: 13px; font-weight: bold; color: #FF9E40; margin-bottom: 4px; }
+  .dialogue-text { font-size: 14px; color: #cbd5e1; font-style: italic; line-height: 1.7; }
+  .num-badge { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; font-size: 12px; font-weight: bold; color: #0A1929; margin-right: 8px; }
+  .emoji-label { font-size: 13.5px; line-height: 1.7; color: #cbd5e1; }
+  .emoji-label strong { color: #FF9E40; }
+  .page-img { width: 100%; border-radius: 10px; margin: 14px 0; display: block; }
+  @media (max-width: 480px) {
+    .cover-title { font-size: 22px; }
+    .cover-sub { font-size: 13px; }
+    table { font-size: 12px; }
+    tbody td { padding: 7px 8px; }
+  }
 
-        /* 封面 */
-        .cover-card {
-            background: linear-gradient(145deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
-            border-radius: 16px; padding: 36px 24px 30px; text-align: center; color: #fff; margin-bottom: 14px;
-            box-shadow: 0 12px 40px rgba(255, 127, 0, 0.15);
-            border: 1px solid rgba(255, 127, 0, 0.2);
-        }
-        .cover-img { width: 100%; border-radius: 12px; margin-bottom: 20px; display: block; }
-        .cover-tag { display: inline-block; background: rgba(255, 127, 0, 0.2); border: 1px solid rgba(255, 127, 0, 0.4); border-radius: 20px; padding: 4px 14px; font-size: 12px; letter-spacing: 1px; margin-bottom: 14px; color: #FF9E40; }
-        .cover-title { font-size: 26px; font-weight: bold; line-height: 1.4; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(255, 127, 0, 0.3); color: #FF9E40; }
-        .cover-sub { font-size: 14px; opacity: 0.85; margin-bottom: 16px; line-height: 1.7; color: #cbd5e1; }
-        .cover-meta { display: flex; justify-content: center; gap: 20px; font-size: 12px; opacity: 0.7; color: #94a3b8; }
-
-        /* 通用卡片 */
-        .card { background: #0D2137; border-radius: 14px; padding: 20px; margin-bottom: 14px; border: 1px solid rgba(255, 127, 0, 0.15); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-
-        /* 章节标题 */
-        .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-        .section-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-        .section-title { font-size: 17px; font-weight: bold; color: #FF9E40; }
-
-        /* 正文 */
-        .intro-text { font-size: 14.5px; line-height: 1.85; color: #cbd5e1; margin-bottom: 14px; text-align: justify; }
-        .text-body { font-size: 14px; line-height: 1.85; color: #cbd5e1; margin-bottom: 12px; text-align: justify; }
-        .sub-title { font-size: 14px; font-weight: bold; color: #FF9E40; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px dashed rgba(255, 127, 0, 0.3); }
-
-        /* 高亮框 */
-        .highlight-box { background: linear-gradient(135deg, rgba(255,127,0,0.1) 0%, rgba(255,127,0,0.05) 100%); border-left: 4px solid #FF7F00; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
-        .highlight-box p { font-size: 14px; line-height: 1.8; color: #FF9E40; }
-
-        /* 信息框 */
-        .info-card { background: linear-gradient(135deg, rgba(255,159,64,0.1) 0%, rgba(255,127,0,0.05) 100%); border-left: 4px solid #FF9E40; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
-        .info-title { font-size: 14px; font-weight: bold; color: #FF9E40; margin-bottom: 6px; }
-        .info-body { font-size: 13.5px; line-height: 1.75; color: #cbd5e1; }
-
-        /* 警告框 */
-        .warn-card { background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(239,68,68,0.05) 100%); border-left: 4px solid #ef4444; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
-        .warn-title { font-size: 14px; font-weight: bold; color: #f87171; margin-bottom: 6px; }
-        .warn-body { font-size: 13.5px; line-height: 1.75; color: #cbd5e1; }
-
-        /* 提示框 */
-        .tip-card { background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0.05) 100%); border-left: 4px solid #10b981; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
-        .tip-title { font-size: 14px; font-weight: bold; color: #34d399; margin-bottom: 6px; }
-        .tip-body { font-size: 13.5px; line-height: 1.75; color: #cbd5e1; }
-
-        /* 分隔线 */
-        .divider { text-align: center; color: #FF7F00; font-size: 18px; margin: 18px 0; opacity: 0.5; }
-
-        /* 引用框 */
-        .quote-box { background: linear-gradient(135deg, rgba(255,127,0,0.08) 0%, rgba(255,127,0,0.03) 100%); border-radius: 12px; padding: 16px 18px; margin: 14px 0; text-align: center; border: 1px solid rgba(255, 127, 0, 0.1); }
-        .quote-text { font-size: 15px; color: #FF9E40; line-height: 1.8; font-style: italic; }
-        .quote-source { font-size: 12px; color: #FF9E40; margin-top: 8px; opacity: 0.7; }
-
-        /* 对话框 */
-        .dialogue-box { background: linear-gradient(135deg, rgba(255,127,0,0.08) 0%, rgba(255,127,0,0.03) 100%); border-left: 4px solid #FF9E40; border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 12px 0; }
-        .dialogue-speaker { font-size: 13px; font-weight: bold; color: #FF9E40; margin-bottom: 4px; }
-        .dialogue-text { font-size: 14px; color: #cbd5e1; font-style: italic; line-height: 1.7; }
-
-        /* 步骤列表 */
-        .step-list { list-style: none; padding: 0; margin: 0; }
-        .step-item { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
-        .step-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: #0A1929; flex-shrink: 0; margin-top: 1px; }
-        .step-text { font-size: 14px; line-height: 1.75; color: #cbd5e1; flex: 1; }
-
-        /* 数字徽章 */
-        .num-badge { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; font-size: 12px; font-weight: bold; color: #0A1929; margin-right: 8px; }
-
-        /* 表格 */
-        .table-wrap { overflow-x: auto; margin: 14px 0; }
-        table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        thead th { background: linear-gradient(135deg, #FF7F00, #FF9E40); color: #0A1929; padding: 10px 12px; text-align: left; font-size: 13px; }
-        thead th:first-child { border-radius: 8px 0 0 0; }
-        thead th:last-child { border-radius: 0 8px 0 0; }
-        tbody tr:nth-child(even) { background: rgba(255,127,0,0.03); }
-        tbody tr:nth-child(odd) { background: transparent; }
-        tbody td { padding: 9px 12px; color: #cbd5e1; border-bottom: 1px solid rgba(255,127,0,0.1); font-size: 12.5px; line-height: 1.5; }
-        tbody tr:last-child td:first-child { border-radius: 0 0 0 8px; }
-        tbody tr:last-child td:last-child { border-radius: 0 0 8px 0; }
-
-        /* 表情标签 */
-        .emoji-label { font-size: 13.5px; line-height: 1.7; color: #94a3b8; }
-        .emoji-label strong { color: #FF9E40; }
-
-        /* 图片 */
-        .page-img { width: 100%; border-radius: 10px; margin: 14px 0; display: block; }
-
-        /* 底部 */
-        .footer { text-align: center; padding: 24px 16px; color: #64748b; font-size: 13px; line-height: 1.8; }
-        .footer-title { font-size: 15px; font-weight: bold; margin-bottom: 8px; color: #FF9E40; opacity: 1; }
-
-        /* 返回按钮 */
-        .back-btn { display: inline-flex; align-items: center; gap: 6px; color: #FF7F00; font-size: 14px; margin-bottom: 16px; padding: 8px 16px; border-radius: 20px; background: rgba(255,127,0,0.1); border: 1px solid rgba(255,127,0,0.3); text-decoration: none; transition: all 0.3s; }
-        .back-btn:hover { background: rgba(255,127,0,0.2); border-color: rgba(255,127,0,0.5); }
-
-        @media (max-width: 480px) {
-            .cover-title { font-size: 22px; }
-            .cover-sub { font-size: 13px; }
-            table { font-size: 12px; }
-            tbody td { padding: 7px 8px; }
-        }
-    </style>
+  </style>
 </head>
 <body>
 
-<!-- 返回按钮 -->
-<a href="index.html" class="back-btn">← 返回首页</a>
-
 <!-- 封面 -->
 <div class="cover-card">
-  <img class="cover-img" src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=80" alt="水晶">
+  <div class="cover-img-wrap">
+    <img class="cover-img" src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=80" alt="水晶">
+  </div>
   <div class="cover-tag">💎 生 活 美 学</div>
   <h1 class="cover-title">为什么我们会被水晶吸引？</h1>
   <p class="cover-sub">科学理性 + 合理玄学，一篇说透水晶能量与情绪价值的完整指南</p>
@@ -166,7 +114,7 @@
   <div class="sub-title">2. 辐射风险要注意！</div>
   <div class="warn-card">
     <div class="warn-title">⚠️ 重要提醒</div>
-    <div class="warn-body">天然水晶本身不含放射性物质，大家可以安心佩戴。但市场上有些来路不明的"能量石"可能存在辐射超标问题。之前有海关截获的所谓"保健石"，检测辐射量达<strong>105微西弗每小时</strong>，戴一天相当于拍<strong>117次胸片</strong>。这种石头还含有<strong>一类致癌物钍-232</strong>。</div>
+    <div class="warn-body">天然水晶本身不含放射性物质，大家可以安心佩戴。但市场上有些来路不明的"能量石"可能存在辐射超标问题。之前有海关截获的所谓"保健石"，检测辐射量达<strong>105微西弗每小时</strong>，戴一天相当于拍<strong>117次胸片</strong>。这种石头还含有一类致癌物<strong>钍-232</strong>。</div>
   </div>
 
   <div class="sub-title">3. 所谓"功效"的真相</div>
@@ -183,7 +131,7 @@
 
   <div class="sub-title">1. 心理安慰的力量</div>
   <div class="quote-box">
-    <p class="quote-text">"有些人要找意义，我就从网上搜了些，那么多，谁能记得住？其实也没必要非按那个来。真有那么灵吗？也就是个心理安慰。"</p>
+    <p class="quote-text">"有些人要找意义，我就从网上搜了些，那么老多，谁能记得住？其实也没必要非按那个来。真有那么灵吗？也就是个心理安慰。"</p>
     <p class="quote-source">— 某水晶店店员坦言</p>
   </div>
   <p class="text-body">这句话说到了点子上！我们每个人在生活中都会遇到压力、焦虑、迷茫的时刻，而水晶作为一种<strong>仪式感的载体</strong>，能给我们带来积极的心理暗示。当你相信"紫水晶助眠"、"粉晶招桃花"时，你的潜意识会主动向这个方向调整。</p>
@@ -222,7 +170,7 @@
           <td>冥想、工作专注</td>
         </tr>
         <tr>
-          <td><span class="num-badge" style="background:#7c3aed;">紫</span><strong>紫水晶</strong></td>
+          <td><span class="num-badge" style="background:#FF7F00;">紫</span><strong>紫水晶</strong></td>
           <td>助眠、冥想</td>
           <td>睡前放松、学习</td>
         </tr>
@@ -257,27 +205,27 @@
   </div>
   <ul class="step-list">
     <li class="step-item">
-      <div class="step-num" style="background:#7c3aed;">1</div>
-      <div class="step-text">找一个安静不被打扰的空间，关掉手机 📵</div>
+      <div class="step-num" style="background:#FF7F00;">1</div>
+      <div class="step-text">找一个安静不被打扰的空间，关掉手机 🎵</div>
     </li>
     <li class="step-item">
-      <div class="step-num" style="background:#7c3aed;">2</div>
+      <div class="step-num" style="background:#FF7F00;">2</div>
       <div class="step-text">播放轻柔的音乐，身边摆放水晶 🎵</div>
     </li>
     <li class="step-item">
-      <div class="step-num" style="background:#7c3aed;">3</div>
+      <div class="step-num" style="background:#FF7F00;">3</div>
       <div class="step-text">选择一颗水晶，用所有感官探索它：看它的颜色、摸它的纹理、感受它的温度 👀</div>
     </li>
     <li class="step-item">
-      <div class="step-num" style="background:#7c3aed;">4</div>
-      <div class="step-text">闭上眼睛，放松呼吸，将注意力拉回内心 🔮</div>
+      <div class="step-num" style="background:#FF7F00;">4</div>
+      <div class="step-text">闭上眼睛，放松呼吸，将注意力拉回内心 🌬️</div>
     </li>
     <li class="step-item">
-      <div class="step-num" style="background:#7c3aed;">5</div>
-      <div class="step-text">想象水晶的能量流经手臂、进入身体，充满你的内心 💎</div>
+      <div class="step-num" style="background:#FF7F00;">5</div>
+      <div class="step-text">想象水晶的能量流经手臂、进入身体，充满你的内心 💭</div>
     </li>
     <li class="step-item">
-      <div class="step-num" style="background:#7c3aed;">6</div>
+      <div class="step-num" style="background:#FF7F00;">6</div>
       <div class="step-text">保持至少10分钟，享受这种平静的感觉 ⏰</div>
     </li>
   </ul>
@@ -289,15 +237,15 @@
   <div class="sub-title">第三步：日常佩戴注意事项</div>
   <ul class="step-list">
     <li class="step-item">
-      <div class="step-num" style="background:#10b981;">左</div>
+      <div class="step-num" style="background:#FF7F00;">左</div>
       <div class="step-text"><strong>左手右手有讲究：</strong>传统说法"左进右出"，左手戴能转运，右手戴则用于排除负能量。不过这更多是文化习俗，不用太纠结～</div>
     </li>
     <li class="step-item">
-      <div class="step-num" style="background:#10b981;">充</div>
+      <div class="step-num" style="background:#FF7F00;">充</div>
       <div class="step-text"><strong>定期"充电"：</strong>水晶长期佩戴后，可以放在阳光下或月光下"充电"几个小时，或者用流水冲洗清洁。</div>
     </li>
     <li class="step-item">
-      <div class="step-num" style="background:#10b981;">心</div>
+      <div class="step-num" style="background:#FF7F00;">心</div>
       <div class="step-text"><strong>保持虔诚之心：</strong>心诚则灵，保持善念，别做亏心事，水晶才会"认主"哦。</div>
     </li>
   </ul>
@@ -335,16 +283,16 @@
 <!-- 最终感悟 -->
 <div class="card" style="background: linear-gradient(145deg, rgba(255,127,0,0.08) 0%, rgba(255,127,0,0.03) 100%); border-color: rgba(255,127,0,0.2);">
   <div class="section-header">
-    <div class="section-icon" style="background: rgba(255,127,0,0.2);">💝</div>
+    <div class="section-icon" style="background: rgba(255,255,255,0.3);">💝</div>
     <div class="section-title" style="color:#FF9E40;">我的最终感悟</div>
   </div>
   <div class="quote-box" style="background: linear-gradient(135deg, rgba(255,127,0,0.05) 0%, rgba(255,127,0,0.02) 100%); border: 1px solid rgba(255, 127, 0, 0.1);">
-    <p class="quote-text" style="font-size:16px;">它既不是"智商税"，也不是"黑科技"，而是——<br><strong>一种生活的美学，一种心灵的慰藉。</strong></p>
+    <p class="quote-text" style="font-size:16px; color:#FF9E40;">它既不是"智商税"，也不是"黑科技"，而是——<br><strong>一种生活的美学，一种心灵的慰藉。</strong></p>
   </div>
   <p class="text-body">当我看到阳光下晶莹剔透的紫水晶，或者摸着温润的白水晶手串时，那种宁静和愉悦是真实的。即使科学无法解释，但<strong style="color:#FF9E40">感觉好本身就是一种价值。</strong></p>
   <p class="text-body">分享水晶能量石的美图，聊聊搭配心得，这本身也是一种社交和情感的连接。如果你喜欢水晶，就开心地佩戴吧，只要不迷信、不盲从、不掏空钱包，它就是生活中的<strong style="color:#FF9E40">小确幸</strong>🌟</p>
-  <div class="divider">💎 · · ✨ · · 💎</div>
-  <div class="tip-card" style="background: linear-gradient(135deg, rgba(255,127,0,0.05) 0%, rgba(255,127,0,0.02) 100%); border-color: rgba(255,127,0,0.1);">
+  <div class="divider">💎 · · · 💎 · · · 💎</div>
+  <div class="tip-card" style="background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(16,185,129,0.02) 100%); border-color: rgba(16,185,129,0.2);">
     <div class="tip-title" style="color:#FF9E40;">💬 今日互动</div>
     <div class="tip-body">你入手的第一块水晶是什么？欢迎在评论区分享你的故事～👇</div>
   </div>
