@@ -51,6 +51,7 @@
                         'ping-slow': 'pingSlow 3s cubic-bezier(0, 0, 0.2, 1) infinite',
                         'glow': 'glow 2s ease-in-out infinite alternate',
                         'spin-slow': 'spin 20s linear infinite',
+                        'breath': 'breath 4s ease-in-out infinite',
                         'fade-in': 'fadeIn 1s ease-in-out',
                         'slide-up': 'slideUp 0.8s ease-out',
                         'slide-down': 'slideDown 0.8s ease-out',
@@ -77,6 +78,10 @@
                         glow: {
                             '0%': { textShadow: '0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700' },
                             '100%': { textShadow: '0 0 10px #FFDF33, 0 0 20px #FFDF33, 0 0 30px #FFDF33' }
+                        },
+                        breath: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.15)' }
                         },
                         fadeIn: {
                             '0%': { opacity: '0' },
@@ -438,10 +443,12 @@
 </head>
 <body class="main-gradient text-primary min-h-screen stars-bg">
     <!-- 背景魔法阵 -->
-    <div class="fixed inset-0 z-0 opacity-20 pointer-events-none flex items-center justify-center">
-            <img src="images/背景图.jpg"
-                 alt="魔法阵背景"
-                 class="w-128 h-128 md:w-192 md:h-192 lg:w-[1000px] lg:h-[1000px] object-cover rounded-full animate-spin-slow">
+    <div class="fixed inset-0 z-0 pointer-events-none flex items-center justify-center">
+        <div class="relative w-128 h-128 md:w-192 md:h-192 lg:w-[1000px] lg:h-[1000px] animate-spin-slow opacity-20">
+            <img src="images/背景图.jpg" alt="魔法阵背景" class="w-full h-full object-cover rounded-full animate-breath">
+            <!-- 四周遮罩消隐 -->
+            <div class="absolute inset-0 rounded-full" style="background: radial-gradient(circle, rgba(10,25,41,0) 35%, rgba(10,25,41,0.8) 70%, rgba(10,25,41,1) 100%); z-index: 1;"></div>
+        </div>
     </div>
     
     <!-- 自定义鼠标 -->
