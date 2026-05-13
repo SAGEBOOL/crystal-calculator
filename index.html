@@ -385,9 +385,11 @@
             .lightbox-close:hover {
                 opacity: 1;
             }
-            /* 橙色发光粒子标题效果 */
+            /* 描边镂空发光标题效果 */
             .purple-glow-title {
-                color: #FF9E40;
+                color: transparent;
+                -webkit-text-stroke: 2px #FF9E40;
+                text-stroke: 2px #FF9E40;
                 animation: orangeGlowPulse 2s ease-in-out infinite alternate;
                 position: relative;
                 display: inline-block;
@@ -424,6 +426,10 @@
                 30% { opacity: 1; transform: translateY(-12px) scale(1); }
                 70% { opacity: 0.6; transform: translateY(-20px) scale(0.7); }
             }
+            .guestbook-text {
+                font-family: 'FangSong', 'STFangSong', '仿宋', serif;
+                color: #ffffff;
+            }
             @keyframes particleFloat2 {
                 0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
                 25% { opacity: 1; transform: translateY(8px) scale(1); }
@@ -457,35 +463,12 @@
                     <div class="h-2 w-2 rounded-full bg-orange/80 animate-pulse-slow"></div>
                     <div class="absolute inset-0 h-2 w-2 rounded-full bg-orange/30 animate-ping-slow"></div>
                 </div>
-                <span class="text-sm text-orange/700 font-magic">石来运转 · 水晶能量分析</span>
+                <span class="text-sm text-orange/700 font-magic">石来运转 · 能量满满</span>
             </div>
             
             <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight font-magic purple-glow-title">水晶能量计算器</h1>
             <p class="text-orange/700 max-w-2xl mx-auto text-lg font-magic text-center">探索水晶与五行的奥秘，发现专属于你的能量平衡之道</p>
         </header>
-
-        <!-- 无限滚动标签 -->
-        <div class="infinite-scroll-container mb-16">
-            <div class="scroll-mask-left"></div>
-            <div class="scroll-mask-right"></div>
-            
-            <div class="flex animate-scroll-left infinite-scroll-content">
-                <div class="flex gap-4 whitespace-nowrap pr-4">
-                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">神秘主义</a>
-                    <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">五行平衡</a>
-                    <a href="crystal-energy-guide.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">水晶能量</a>
-                    <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">能量疗愈</a>
-                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">占星术</a>
-                </div>
-                <div class="flex gap-4 whitespace-nowrap pr-4">
-                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">神秘主义</a>
-                    <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">五行平衡</a>
-                    <a href="crystal-energy-guide.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">水晶能量</a>
-                    <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">能量疗愈</a>
-                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">占星术</a>
-                </div>
-            </div>
-        </div>
 
         <!-- 主要内容区域 -->
         <main>
@@ -780,56 +763,81 @@
             </div>
             
             <!-- 留言列表 -->
-            <div id="guestbook-list" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+            <div id="guestbook-list" class="space-y-4 max-h-[480px] overflow-y-auto pr-2">
                 <!-- 示例留言 -->
-                <div class="p-4 rounded-lg bg-dark-blue/20 border border-orange/10 hover:border-orange/30 transition-all duration-300">
+                <div class="p-4 rounded-lg bg-dark-blue/20 border border-orange/10 hover:border-orange/30 transition-all duration-300 pinned-message">
                     <div class="flex items-start gap-3">
-                        <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fa fa-user text-orange/60"></i>
+                        <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0 text-lg">
+                            🔮
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center gap-2 mb-1">
                                 <span class="text-sm text-orange/80 font-magic">神秘探索者</span>
                                 <span class="text-xs text-orange/40 font-magic">刚刚</span>
+                                <span class="text-xs bg-orange/20 text-orange/80 px-1.5 py-0.5 rounded font-magic">置顶</span>
                             </div>
-                            <p class="text-orange/70 font-magic text-sm">爱了爱了，哪里可以买到啊🥰，求链接</p>
+                            <p class="guestbook-text text-sm">爱了爱了，哪里可以买到啊🥰，求链接</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="p-4 rounded-lg bg-dark-blue/20 border border-orange/10 hover:border-orange/30 transition-all duration-300">
                     <div class="flex items-start gap-3">
-                        <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fa fa-user text-orange/60"></i>
+                        <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0 text-lg">
+                            💎
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center gap-2 mb-1">
                                 <span class="text-sm text-orange/80 font-magic">水晶爱好者</span>
                                 <span class="text-xs text-orange/40 font-magic">5分钟前</span>
                             </div>
-                            <p class="text-orange/70 font-magic text-sm">推荐的水滴流真的很准，事业运明显提升了，感谢！</p>
+                            <p class="guestbook-text text-sm">推荐的水滴流真的很准，事业运明显提升了，感谢！</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="p-4 rounded-lg bg-dark-blue/20 border border-orange/10 hover:border-orange/30 transition-all duration-300">
                     <div class="flex items-start gap-3">
-                        <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fa fa-user text-orange/60"></i>
+                        <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0 text-lg">
+                            ✨
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center gap-2 mb-1">
                                 <span class="text-sm text-orange/80 font-magic">能量修行者</span>
                                 <span class="text-xs text-orange/40 font-magic">1小时前</span>
                             </div>
-                            <p class="text-orange/70 font-magic text-sm">五行平衡真的很重要，之前总是感觉不对劲，现在找到方向了。</p>
+                            <p class="guestbook-text text-sm">五行平衡真的很重要，之前总是感觉不对劲，现在找到方向了。</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- 无限滚动标签 -->
+        <div class="infinite-scroll-container mb-16">
+            <div class="scroll-mask-left"></div>
+            <div class="scroll-mask-right"></div>
+            
+            <div class="flex animate-scroll-left infinite-scroll-content">
+                <div class="flex gap-4 whitespace-nowrap pr-4">
+                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">神秘主义</a>
+                    <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">五行平衡</a>
+                    <a href="crystal-energy-guide.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">水晶能量</a>
+                    <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">能量疗愈</a>
+                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">占星术</a>
+                </div>
+                <div class="flex gap-4 whitespace-nowrap pr-4">
+                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">神秘主义</a>
+                    <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">五行平衡</a>
+                    <a href="crystal-energy-guide.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">水晶能量</a>
+                    <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">能量疗愈</a>
+                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">占星术</a>
+                </div>
+            </div>
+        </div>
+
     </div>
-    
+
     <!-- 底部信息 -->
     <footer class="text-center text-orange/50 text-sm py-12 mt-32 relative z-30 clear-both" style="background: linear-gradient(135deg, #0A1929 0%, #0D2137 100%); border-top: 1px solid rgba(255, 127, 0, 0.2);">
         <div class="max-w-6xl mx-auto px-4">
@@ -1618,29 +1626,39 @@
             const list = document.getElementById('guestbook-list');
             const names = ['神秘探索者', '水晶爱好者', '能量修行者', '五行学徒', '灵性追寻者', '水晶守护者'];
             const randomName = names[Math.floor(Math.random() * names.length)];
-            
+            const emojis = ['🔮', '💎', '✨', '🌙', '⭐', '🔥', '🌿', '💫', '⚡', '🌟'];
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+
             const newMessage = document.createElement('div');
             newMessage.className = 'p-4 rounded-lg bg-dark-blue/20 border border-orange/10 hover:border-orange/30 transition-all duration-300 animate-fade-in';
             newMessage.innerHTML = `
                 <div class="flex items-start gap-3">
-                    <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
-                        <i class="fa fa-user text-orange/60"></i>
+                    <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0 text-lg">
+                        ${randomEmoji}
                     </div>
                     <div class="flex-1">
                         <div class="flex items-center gap-2 mb-1">
                             <span class="text-sm text-orange/80 font-magic">${randomName}</span>
                             <span class="text-xs text-orange/40 font-magic">刚刚</span>
                         </div>
-                        <p class="text-orange/70 font-magic text-sm">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+                        <p class="guestbook-text text-sm">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
                     </div>
                 </div>
             `;
             
-            list.insertBefore(newMessage, list.firstChild);
+            // 插入到置顶留言之后
+            const pinnedCount = list.querySelectorAll('.pinned-message').length;
+            if (pinnedCount > 0 && list.children[pinnedCount]) {
+                list.insertBefore(newMessage, list.children[pinnedCount]);
+            } else {
+                list.insertBefore(newMessage, list.firstChild);
+            }
             input.value = '';
-            
-            // 限制留言数量，最多显示20条
-            while (list.children.length > 20) {
+
+            // 限制留言数量：置顶留言永远保留，最多再显示20条普通留言
+            const maxRegular = 20;
+            const currentPinned = list.querySelectorAll('.pinned-message').length;
+            while (list.children.length - currentPinned > maxRegular) {
                 list.removeChild(list.lastChild);
             }
         }
