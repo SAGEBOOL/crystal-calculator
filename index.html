@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>水晶能量计算器 - 神秘主义版</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JSHBHNFDT3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JSHBHNFDT3');
+    </script>
     <!-- Tailwind CSS v3 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -326,15 +334,61 @@
                 border: 2px solid #FF7F00;
                 box-shadow: 0 0 20px rgba(255, 127, 0, 0.3);
             }
+            /* Lightbox 图片放大 */
+            .lightbox-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.85);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+                cursor: zoom-out;
+            }
+            .lightbox-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            .lightbox-overlay img {
+                max-width: 90vw;
+                max-height: 90vh;
+                object-fit: contain;
+                border-radius: 12px;
+                box-shadow: 0 0 40px rgba(255, 127, 0, 0.3);
+                transform: scale(0.8);
+                transition: transform 0.3s ease;
+            }
+            .lightbox-overlay.active img {
+                transform: scale(1);
+            }
+            .lightbox-close {
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                color: #FF7F00;
+                font-size: 36px;
+                cursor: pointer;
+                opacity: 0.7;
+                transition: opacity 0.2s;
+                z-index: 101;
+            }
+            .lightbox-close:hover {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body class="main-gradient text-primary min-h-screen stars-bg">
     <!-- 背景魔法阵 -->
-    <div class="fixed inset-0 z-0 opacity-20 pointer-events-none">
-        <img src="https://p11-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/dd3e30d600ae4f95a8ecb003dd07a644~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605121407351A89BFEA1594A5CD5739&rrcfp=f06b921b&x-expires=1781158121&x-signature=s8FCS9yMYcrUPvD3InUS30PT4p8%3D" 
-             alt="魔法阵背景" 
-             class="w-full h-full object-cover animate-spin-slow">
+    <div class="fixed inset-0 z-0 opacity-20 pointer-events-none flex items-center justify-center">
+            <img src="images/IMG_3147.jpg"
+                 alt="魔法阵背景"
+                 class="w-128 h-128 md:w-192 md:h-192 lg:w-[1000px] lg:h-[1000px] object-cover rounded-full animate-spin-slow">
     </div>
     
     <!-- 自定义鼠标 -->
@@ -369,19 +423,15 @@
                     <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">神秘主义</a>
                     <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">五行平衡</a>
                     <a href="crystal-energy-guide.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">水晶能量</a>
-                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">魔法阵</a>
                     <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">能量疗愈</a>
                     <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">占星术</a>
-                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">神秘学</a>
                 </div>
                 <div class="flex gap-4 whitespace-nowrap pr-4">
                     <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">神秘主义</a>
                     <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">五行平衡</a>
                     <a href="crystal-energy-guide.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">水晶能量</a>
-                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">魔法阵</a>
                     <a href="crystal-five-elements.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">能量疗愈</a>
                     <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">占星术</a>
-                    <a href="crystal-secrets.html" class="scroll-tag px-4 py-2 rounded-full orange-border text-orange/700 hover-effect glow-effect no-underline" onclick="handleTagClick(event, this)">神秘学</a>
                 </div>
             </div>
         </div>
@@ -492,7 +542,7 @@
                         <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
                             <!-- 主串图片 -->
                             <div class="w-40 h-40 md:w-56 md:h-56 magic-circle flex items-center justify-center overflow-hidden relative">
-                                <img id="main-crystal-image" src="" alt="本命主串" class="w-4/5 h-4/5 object-contain animate-float image-hover-effect">
+                                <img id="main-crystal-image" src="" alt="本命主串" class="w-full h-full object-cover animate-float image-hover-effect">
                                 <div class="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent rounded-full"></div>
                                 <!-- 魔法符文装饰 -->
                                 <div class="absolute top-2 left-2 w-8 h-8 text-gold/50 flex items-center justify-center">
@@ -521,7 +571,8 @@
                     
                     <!-- 五行分析图表 -->
                     <div class="magic-card rounded-xl p-6">
-                        <h3 class="text-xl font-medium text-orange/80 mb-4 font-magic">你的五行能量图谱</h3>
+                        <h3 class="text-xl font-medium text-orange/80 mb-2 font-magic">你的五行能量图谱</h3>
+                        <p class="text-white/90 text-sm mb-4" style="font-family: 'FangSong', 'STFangsong', '仿宋', serif;">如需详解五行能量互补，请咨询客服💁</p>
                         <div class="h-80">
                             <canvas id="element-chart"></canvas>
                         </div>
@@ -751,7 +802,7 @@
                         <li><a href="crystal-secrets.html" class="hover:text-orange transition-colors hover-effect">水晶奥秘</a></li>
                         <li><a href="crystal-five-elements.html" class="hover:text-orange transition-colors hover-effect">五行理论</a></li>
                         <li><a href="#" class="hover:text-orange transition-colors hover-effect">魔法指南</a></li>
-                        <li><a href="#" class="hover:text-orange transition-colors hover-effect">关于我们</a></li>
+                        <li><a href="https://sagebool.github.io/lifeline/" target="_blank" class="hover:text-orange transition-all hover-effect font-bold" onclick="this.style.transform='scale(1.3)'; setTimeout(() => this.style.transform='scale(1)', 300);">人生运势K线图</a></li>
                     </ul>
                 </div>
                 
@@ -867,113 +918,116 @@
                     element: "木",
                     color: "#7BA05B",
                     effect: "旺事业贵人、稳情绪、助成长、补木气",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/336e299034a89a8c38a3b589ea786d4c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=Pfp0k2FgVEC5Jm6c5ECb5KZAmVc%3D"
+                    image: "images/绿幽灵.png"
                 },
                 fire: {
                     name: "红玛瑙主串",
                     element: "火",
                     color: "#D36582",
                     effect: "激发活力、增强自信、改善人际关系、旺桃花",
-                    image: "https://p11-doubao-search-sign.byteimg.com/labis/65639679ebcd63d62c24aacce691fd9b~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=rAPoBb%2FCHtfqxJyHIJX4FPuljWs%3D"
+                    image: "images/红玛瑙.png"
                 },
                 earth: {
                     name: "黄水晶主串",
                     element: "土",
                     color: "#D3B17D",
                     effect: "稳固财运、增强耐力、保健康、提升事业运",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/4fc2d82f45a3dc6ec17052b06ec82bad~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=8KYHxgR2mOFKlliP1VrOhykKsHI%3D"
+                    image: "images/黄水晶.png"
                 },
                 metal: {
                     name: "白水晶主串",
                     element: "金",
                     color: "#70A9A1",
                     effect: "增强决断力、招财、净化负能量、提升智慧",
-                    image: "https://p26-doubao-search-sign.byteimg.com/labis/1d986eac87c6ec6cfd82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=ZhEXU5WKtILrsOQEzpiPSZLkM%2F8%3D"
+                    image: "images/白水晶.png"
                 },
                 water: {
                     name: "海蓝宝主串",
                     element: "水",
                     color: "#5C80BC",
                     effect: "提升智慧、舒缓情绪、增强沟通、防小人",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=roeolHELAy6P8LxkRq5oQvtyRG8%3D"
+                    image: "images/海蓝宝.png"
                 }
             },
             
             // 今日幸运能量串
             dailyCrystals: {
+                // 五行相生：我生者为幸运串
+                // 木生火 → 红玛瑙 | 火生土 → 黄水晶 | 土生金 → 白水晶 | 金生水 → 海蓝宝 | 水生木 → 绿幽灵
                 wood: {
-                    name: "今日幸运·绿幽灵",
-                    element: "木",
-                    color: "#7BA05B",
-                    effect: "今日事业运提升、贵人相助、思维清晰",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/336e299034a89a8c38a3b589ea786d4c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=Pfp0k2FgVEC5Jm6c5ECb5KZAmVc%3D"
-                },
-                fire: {
                     name: "今日幸运·红玛瑙",
                     element: "火",
                     color: "#D36582",
-                    effect: "今日人际关系和谐、魅力提升、创意爆发",
-                    image: "https://p11-doubao-search-sign.byteimg.com/labis/65639679ebcd63d62c24aacce691fd9b~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=rAPoBb%2FCHtfqxJyHIJX4FPuljWs%3D"
+                    effect: "今日人际关系和谐、魅力提升、创意爆发（木生火，火为木所生，主今日表达与魅力）",
+                    image: "images/红玛瑙.png"
                 },
-                earth: {
+                fire: {
                     name: "今日幸运·黄水晶",
                     element: "土",
                     color: "#D3B17D",
-                    effect: "今日财运亨通、稳重踏实、身体健康",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/4fc2d82f45a3dc6ec17052b06ec82bad~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=8KYHxgR2mOFKlliP1VrOhykKsHI%3D"
+                    effect: "今日财运亨通、稳重踏实、身体健康（火生土，土为火所生，主今日财运与稳定）",
+                    image: "images/黄水晶.png"
                 },
-                metal: {
+                earth: {
                     name: "今日幸运·白水晶",
                     element: "金",
                     color: "#70A9A1",
-                    effect: "今日决策果断、财运顺畅、头脑清晰",
-                    image: "https://p26-doubao-search-sign.byteimg.com/labis/1d986eac87c6ec6cfd82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=ZhEXU5WKtILrsOQEzpiPSZLkM%2F8%3D"
+                    effect: "今日决策果断、财运顺畅、头脑清晰（土生金，金为土所生，主今日决断与财运）",
+                    image: "images/白水晶.png"
                 },
-                water: {
+                metal: {
                     name: "今日幸运·海蓝宝",
                     element: "水",
                     color: "#5C80BC",
-                    effect: "今日智慧提升、沟通顺畅、情绪稳定",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=roeolHELAy6P8LxkRq5oQvtyRG8%3D"
+                    effect: "今日智慧提升、沟通顺畅、情绪稳定（金生水，水为金所生，主今日智慧与沟通）",
+                    image: "images/海蓝宝.png"
+                },
+                water: {
+                    name: "今日幸运·绿幽灵",
+                    element: "木",
+                    color: "#7BA05B",
+                    effect: "今日事业运提升、贵人相助、思维清晰（水生木，木为水所生，主今日成长与贵人）",
+                    image: "images/绿幽灵.png"
                 }
             },
             
-            // 职场加持能量串
+            // 职场加持能量串（五行相生：我生者为职场加持串）
             careerCrystals: {
+                // 木生火 → 红玛瑙 | 火生土 → 黄水晶 | 土生金 → 白水晶 | 金生水 → 海蓝宝 | 水生木 → 绿幽灵
                 wood: {
-                    name: "职场加持·绿幽灵",
-                    element: "木",
-                    color: "#7BA05B",
-                    effect: "职场贵人相助、事业晋升、团队协作",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/336e299034a89a8c38a3b589ea786d4c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=Pfp0k2FgVEC5Jm6c5ECb5KZAmVc%3D"
-                },
-                fire: {
                     name: "职场加持·红玛瑙",
                     element: "火",
                     color: "#D36582",
-                    effect: "职场人际关系、领导赏识、演讲表达",
-                    image: "https://p11-doubao-search-sign.byteimg.com/labis/65639679ebcd63d62c24aacce691fd9b~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=rAPoBb%2FCHtfqxJyHIJX4FPuljWs%3D"
+                    effect: "职场人际关系、领导赏识、演讲表达（木生火，火为木所生，主职场展现与表达）",
+                    image: "images/红玛瑙.png"
                 },
-                earth: {
+                fire: {
                     name: "职场加持·黄水晶",
                     element: "土",
                     color: "#D3B17D",
-                    effect: "职场财运稳定、工作踏实、抗压能力",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/4fc2d82f45a3dc6ec17052b06ec82bad~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=8KYHxgR2mOFKlliP1VrOhykKsHI%3D"
+                    effect: "职场财运稳定、工作踏实、抗压能力（火生土，土为火所生，主职场财运与稳定）",
+                    image: "images/黄水晶.png"
                 },
-                metal: {
+                earth: {
                     name: "职场加持·白水晶",
                     element: "金",
                     color: "#70A9A1",
-                    effect: "职场决策能力、专业技能、权威感",
-                    image: "https://p26-doubao-search-sign.byteimg.com/labis/1d986eac87c6ec6cfd82974959a6aab1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=ZhEXU5WKtILrsOQEzpiPSZLkM%2F8%3D"
+                    effect: "职场决策能力、专业技能、权威感（土生金，金为土所生，主职场决断与专业）",
+                    image: "images/白水晶.png"
                 },
-                water: {
+                metal: {
                     name: "职场加持·海蓝宝",
                     element: "水",
                     color: "#5C80BC",
-                    effect: "职场沟通能力、客户关系、思维敏捷",
-                    image: "https://p3-doubao-search-sign.byteimg.com/labis/image/cdc63954466551e6b839ee2477499863~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794116515&x-signature=roeolHELAy6P8LxkRq5oQvtyRG8%3D"
+                    effect: "职场沟通能力、客户关系、思维敏捷（金生水，水为金所生，主职场智慧与沟通）",
+                    image: "images/海蓝宝.png"
+                },
+                water: {
+                    name: "职场加持·绿幽灵",
+                    element: "木",
+                    color: "#7BA05B",
+                    effect: "职场贵人相助、事业晋升、团队协作（水生木，木为水所生，主职场成长与贵人）",
+                    image: "images/绿幽灵.png"
                 }
             },
             
@@ -1376,7 +1430,7 @@
                 dropElement.innerHTML = `
                     <div class="flex flex-col items-center text-center">
                         <div class="w-24 h-24 rounded-lg overflow-hidden mb-4 magic-circle relative">
-                            <img src="${drop.image}" alt="${drop.name}" class="w-full h-full object-cover image-hover-effect">
+                            <img src="${drop.image}" alt="${drop.name}" class="w-full h-full object-cover image-hover-effect" onclick="event.stopPropagation(); openLightbox(this.src);">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-lg"></div>
                         </div>
                         <div class="w-full">
@@ -1547,6 +1601,44 @@
                 });
             }
         });
+
+        // Lightbox 图片点击放大功能
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // 为所有图片添加点击放大事件（使用事件委托，支持动态生成的图片）
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.addEventListener('click', (e) => {
+                const img = e.target.closest('img');
+                if (img && img.id !== 'lightbox-img' && img.src) {
+                    openLightbox(img.src);
+                }
+            });
+        });
+
+        // ESC键关闭Lightbox
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
     </script>
+
+    <!-- Lightbox 图片放大 -->
+    <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="event.stopPropagation(); closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="放大图片">
+    </div>
 </body>
 </html>
