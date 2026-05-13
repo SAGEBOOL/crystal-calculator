@@ -380,6 +380,59 @@
             .lightbox-close:hover {
                 opacity: 1;
             }
+            /* 紫色发光粒子标题效果 */
+            .purple-glow-title {
+                background: linear-gradient(90deg, #c084fc, #e879f9, #a855f7, #c084fc);
+                background-size: 300% 100%;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                animation: purpleGradientMove 4s ease infinite, purpleGlowPulse 2s ease-in-out infinite alternate;
+                position: relative;
+                display: inline-block;
+                filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.6)) drop-shadow(0 0 16px rgba(192, 132, 252, 0.4));
+            }
+            .purple-glow-title::before,
+            .purple-glow-title::after {
+                content: '';
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0;
+            }
+            .purple-glow-title::before {
+                width: 6px; height: 6px;
+                background: #e879f9;
+                box-shadow: 0 0 8px #e879f9, 0 0 16px #c084fc;
+                top: -4px; left: 15%;
+                animation: particleFloat1 3s ease-in-out infinite;
+            }
+            .purple-glow-title::after {
+                width: 4px; height: 4px;
+                background: #a855f7;
+                box-shadow: 0 0 6px #a855f7, 0 0 12px #c084fc;
+                bottom: -2px; right: 20%;
+                animation: particleFloat2 2.5s ease-in-out infinite 0.5s;
+            }
+            @keyframes purpleGradientMove {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+            @keyframes purpleGlowPulse {
+                0% { filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.5)) drop-shadow(0 0 12px rgba(192, 132, 252, 0.3)); }
+                100% { filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.8)) drop-shadow(0 0 24px rgba(192, 132, 252, 0.5)) drop-shadow(0 0 36px rgba(216, 180, 254, 0.3)); }
+            }
+            @keyframes particleFloat1 {
+                0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+                30% { opacity: 1; transform: translateY(-12px) scale(1); }
+                70% { opacity: 0.6; transform: translateY(-20px) scale(0.7); }
+            }
+            @keyframes particleFloat2 {
+                0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+                25% { opacity: 1; transform: translateY(8px) scale(1); }
+                65% { opacity: 0.5; transform: translateY(16px) scale(0.6); }
+            }
         }
     </style>
 </head>
@@ -409,7 +462,7 @@
                 <span class="text-sm text-orange/700 font-magic">石来运转 · 水晶能量分析</span>
             </div>
             
-            <h1 class="text-4xl md:text-6xl font-bold text-primary mb-4 text-shadow-glow tracking-tight font-magic animate-glow">水晶能量计算器</h1>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight font-magic purple-glow-title">水晶能量计算器</h1>
             <p class="text-orange/700 max-w-2xl mx-auto text-lg font-magic text-center">探索水晶与五行的奥秘，发现专属于你的能量平衡之道</p>
         </header>
 
