@@ -3,368 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>五行理论 - 水晶能量计算器</title>
+    <title>如何用五行能量加持自身磁场</title>
+    <!-- Tailwind CSS v3 -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#FFFFFF',
-                        secondary: '#FF7F00',
                         dark: '#0A1929',
                         'dark-blue': '#0D2137',
-                        'dark-purple': '#081420',
-                        'orange': '#FF7F00',
+                        orange: '#FF7F00',
                         'orange-light': '#FF9E40',
-                        'orange-dark': '#CC6600',
-                        'gold': '#FFD700',
-                        wood: '#7BA05B',
-                        fire: '#D36582',
-                        earth: '#D3B17D',
-                        metal: '#70A9A1',
-                        water: '#5C80BC'
-                    },
-                    fontFamily: {
-                        magic: ['SimHei', 'Microsoft YaHei', 'sans-serif']
                     }
                 }
             }
         }
     </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .magic-card {
-                background: linear-gradient(135deg, rgba(13, 33, 55, 0.9) 0%, rgba(10, 25, 41, 0.95) 100%);
-                backdrop-filter: blur(10px);
-            }
-            .crystal-shadow {
-                box-shadow: 0 0 30px rgba(255, 127, 0, 0.1), 0 0 60px rgba(255, 159, 64, 0.05);
-            }
-            .neon-border { border: 1px solid rgba(255, 127, 0, 0.2); }
-            .text-shadow-glow {
-                text-shadow: 0 0 10px #FFDF33, 0 0 20px #FFDF33, 0 0 30px #FFDF33;
-            }
-            .highlight-box {
-                background: linear-gradient(135deg, rgba(255, 223, 0, 0.05), rgba(255, 159, 64, 0.05));
-                border-left: 4px solid #FFD700;
-            }
-            .info-box {
-                background: linear-gradient(135deg, rgba(255, 127, 0, 0.05), rgba(255, 159, 64, 0.05));
-                border-left: 4px solid #FF7F00;
-            }
-            .element-card {
-                background: linear-gradient(135deg, rgba(13, 33, 55, 0.6), rgba(10, 25, 41, 0.8));
-                border: 1px solid rgba(255, 127, 0, 0.15);
-            }
-            .nav-bg {
-                background: rgba(10, 25, 41, 0.9);
-            }
-            .hover-effect:hover {
-                text-shadow: 0 0 8px rgba(255, 127, 0, 0.6);
-            }
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            .animate-fade-in {
-                animation: fadeIn 0.6s ease-out;
-            }
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0A1929; font-family: 'SimHei', 'Microsoft YaHei', -apple-system, sans-serif; color: #e2e8f0; padding: 12px; max-width: 680px; margin: 0 auto; }
+
+        /* 封面 */
+        .cover-card {
+            background: linear-gradient(145deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+            border-radius: 16px; padding: 36px 24px 30px; text-align: center; color: #fff; margin-bottom: 14px;
+            box-shadow: 0 12px 40px rgba(255, 127, 0, 0.15);
+            border: 1px solid rgba(255, 127, 0, 0.2);
+        }
+        .cover-img { width: 100%; border-radius: 12px; margin-bottom: 20px; display: block; }
+        .cover-tag { display: inline-block; background: rgba(255, 127, 0, 0.2); border: 1px solid rgba(255, 127, 0, 0.4); border-radius: 20px; padding: 4px 14px; font-size: 12px; letter-spacing: 1px; margin-bottom: 14px; color: #FF9E40; }
+        .cover-title { font-size: 26px; font-weight: bold; line-height: 1.4; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(255, 127, 0, 0.3); color: #FF9E40; }
+        .cover-sub { font-size: 14px; opacity: 0.85; margin-bottom: 16px; line-height: 1.7; color: #cbd5e1; }
+        .cover-meta { display: flex; justify-content: center; gap: 20px; font-size: 12px; opacity: 0.7; color: #94a3b8; }
+
+        /* 通用卡片 */
+        .card { background: #0D2137; border-radius: 14px; padding: 20px; margin-bottom: 14px; border: 1px solid rgba(255, 127, 0, 0.15); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+
+        /* 章节标题 */
+        .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+        .section-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .section-title { font-size: 17px; font-weight: bold; color: #FF9E40; }
+
+        /* 正文 */
+        .text-body { font-size: 14.5px; line-height: 1.85; color: #cbd5e1; margin-bottom: 12px; text-align: justify; }
+        .sub-title { font-size: 14px; font-weight: bold; color: #FF9E40; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px dashed rgba(255, 127, 0, 0.3); }
+
+        /* 高亮框 */
+        .highlight-box { background: linear-gradient(135deg, rgba(255,127,0,0.1) 0%, rgba(255,127,0,0.05) 100%); border-left: 4px solid #FF7F00; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
+        .highlight-box p { font-size: 14px; line-height: 1.8; color: #FF9E40; }
+
+        /* 信息框 */
+        .info-card { background: linear-gradient(135deg, rgba(255,159,64,0.1) 0%, rgba(255,127,0,0.05) 100%); border-left: 4px solid #FF9E40; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
+        .info-title { font-size: 14px; font-weight: bold; color: #FF9E40; margin-bottom: 6px; }
+        .info-body { font-size: 13.5px; line-height: 1.75; color: #cbd5e1; }
+
+        /* 警告框 */
+        .warn-card { background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(239,68,68,0.05) 100%); border-left: 4px solid #ef4444; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
+        .warn-title { font-size: 14px; font-weight: bold; color: #f87171; margin-bottom: 6px; }
+        .warn-body { font-size: 13.5px; line-height: 1.75; color: #cbd5e1; }
+
+        /* 提示框 */
+        .tip-card { background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0.05) 100%); border-left: 4px solid #10b981; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0; }
+        .tip-title { font-size: 14px; font-weight: bold; color: #34d399; margin-bottom: 6px; }
+        .tip-body { font-size: 13.5px; line-height: 1.75; color: #cbd5e1; }
+
+        /* 分隔线 */
+        .divider { text-align: center; color: #FF7F00; font-size: 18px; margin: 18px 0; opacity: 0.5; }
+
+        /* 引用框 */
+        .quote-box { background: linear-gradient(135deg, rgba(255,127,0,0.08) 0%, rgba(255,127,0,0.03) 100%); border-radius: 12px; padding: 16px 18px; margin: 14px 0; text-align: center; border: 1px solid rgba(255, 127, 0, 0.1); }
+        .quote-text { font-size: 15px; color: #FF9E40; line-height: 1.8; font-style: italic; }
+
+        /* 步骤列表 */
+        .step-list { list-style: none; padding: 0; margin: 0; }
+        .step-item { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+        .step-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: #0A1929; flex-shrink: 0; margin-top: 1px; background: #FF7F00; }
+        .step-text { font-size: 14px; line-height: 1.75; color: #cbd5e1; flex: 1; }
+
+        /* 数字徽章 */
+        .num-badge { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; font-size: 12px; font-weight: bold; color: #0A1929; margin-right: 8px; }
+        .badge-metal { background: #9ca3af; }
+        .badge-wood { background: #10b981; }
+        .badge-water { background: #1f2937; }
+        .badge-fire { background: #dc2626; }
+        .badge-earth { background: #d97706; }
+
+        /* 五行卡片 */
+        .element-card { background: #0D2137; border-radius: 12px; padding: 16px; margin: 14px 0; border: 1px solid rgba(255, 127, 0, 0.15); }
+        .element-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .element-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+        .element-name { font-size: 16px; font-weight: bold; }
+        .element-sub { font-size: 12px; opacity: 0.7; margin-top: 2px; color: #94a3b8; }
+        .element-field { margin-bottom: 8px; }
+        .element-label { font-size: 12px; font-weight: bold; color: #FF9E40; margin-bottom: 4px; }
+        .element-value { font-size: 13.5px; line-height: 1.7; color: #cbd5e1; }
+
+        /* 留言区 */
+        .comments-section { background: #0D2137; border-radius: 14px; padding: 20px; margin-bottom: 14px; border: 1px solid rgba(255, 127, 0, 0.15); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+        .comments-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+        .comments-title { font-size: 17px; font-weight: bold; color: #FF9E40; }
+        .comment-count { background: #FF7F00; color: #0A1929; font-size: 12px; padding: 2px 10px; border-radius: 20px; font-weight: bold; }
+        .comment-item { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(255, 127, 0, 0.1); }
+        .comment-item:last-child { border-bottom: none; }
+        .comment-avatar { width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #0A1929; font-weight: bold; }
+        .comment-content { flex: 1; }
+        .comment-user { font-size: 13px; font-weight: bold; color: #FF9E40; margin-bottom: 4px; }
+        .comment-text { font-size: 14px; line-height: 1.7; color: #cbd5e1; }
+        .comment-time { font-size: 11px; color: #64748b; margin-top: 4px; }
+        .comment-like { display: flex; align-items: center; gap: 4px; font-size: 12px; color: #64748b; margin-top: 6px; }
+        .comment-like.liked { color: #ef4444; }
+        .pinned-badge { display: inline-block; background: linear-gradient(135deg, #FF9E40, #FF7F00); color: #0A1929; font-size: 10px; padding: 1px 8px; border-radius: 10px; margin-left: 8px; font-weight: bold; }
+
+        /* 底部 */
+        .footer { text-align: center; padding: 24px 16px; color: #64748b; font-size: 13px; line-height: 1.8; }
+        .footer-title { font-size: 15px; font-weight: bold; margin-bottom: 8px; color: #FF9E40; opacity: 1; }
+
+        /* 返回按钮 */
+        .back-btn { display: inline-flex; align-items: center; gap: 6px; color: #FF7F00; font-size: 14px; margin-bottom: 16px; padding: 8px 16px; border-radius: 20px; background: rgba(255,127,0,0.1); border: 1px solid rgba(255,127,0,0.3); text-decoration: none; transition: all 0.3s; }
+        .back-btn:hover { background: rgba(255,127,0,0.2); border-color: rgba(255,127,0,0.5); }
+
+        @media (max-width: 480px) {
+            .cover-title { font-size: 22px; }
+            .cover-sub { font-size: 13px; }
         }
     </style>
 </head>
-<body class="bg-dark text-orange/80 min-h-screen">
-    <!-- 背景 -->
-    <div class="fixed inset-0 z-0 overflow-hidden">
-        <div class="absolute inset-0 bg-dark opacity-95"></div>
-        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 20% 50%, rgba(255, 127, 0, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(255, 159, 64, 0.05) 0%, transparent 50%);"></div>
+<body>
+
+<!-- 返回按钮 -->
+<a href="index.html" class="back-btn">← 返回首页</a>
+
+<!-- 封面 -->
+<div class="cover-card">
+  <img class="cover-img" src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=80" alt="五行水晶">
+  <div class="cover-tag">🔮 五 行 能 量</div>
+  <h1 class="cover-title">如何用五行能量<br>加持自身磁场</h1>
+  <p class="cover-sub">金木水火土 × 水晶能量<br>一份完整的五行水晶能量调理指南</p>
+  <div class="cover-meta">
+    <span>📅 2026年5月</span>
+    <span>⏱️ 阅读 10 分钟</span>
+    <span>🔮 五行水晶</span>
+  </div>
+</div>
+
+<!-- 引言 -->
+<div class="card">
+  <p class="text-body">在快节奏的现代生活中，我们常常感觉被无形的压力束缚，心灵渴望解脱。这股"无形的力量"，在古老的智慧中被视为<strong style="color:#FF9E40">"气"或"能量场"</strong>。而水晶，作为大地孕育的精华，被认为是连接无形世界与有形肉体的桥梁。</p>
+  <p class="text-body">今天，我们就来探讨如何利用水晶的五行属性，来平衡我们自身的能量，达到<strong style="color:#FF9E40">加持运势、调和身心</strong>的目的。🔮</p>
+</div>
+
+<!-- 一、何为无形的"能量场"？ -->
+<div class="card">
+  <div class="section-header">
+    <div class="section-icon" style="background: linear-gradient(135deg,#3b82f6,#60a5fa);">🌌</div>
+    <div class="section-title">一、何为无形的"能量场"？</div>
+  </div>
+  <p class="text-body">我们身处的世界，万物皆有其振动频率。人体本身就是一个复杂的能量场，根据现代科学和古老哲学的结合，这种磁场被分为<strong style="color:#FF9E40">现实维度的物理电磁场</strong>和<strong style="color:#FF9E40">不可测量的"人性磁场"</strong>（或称辉光、以太体）。</p>
+  <p class="text-body">这种无形的能量场会随着我们的情绪、健康状态甚至思想而变化。当负面情绪过多时，会降低我们的振动频率，使人更容易感到疲惫和痛苦。</p>
+  <div class="highlight-box">
+    <p>💎 水晶，因其独特的晶格结构和亿万年的地质淬炼，本身带有<strong>稳定且高频的能量</strong>。佩戴或摆放水晶，就如同为我们自身的能量场注入一股清流，通过<strong>"共振"原理</strong>，将低频能量调节提升为高频能量。</p>
+  </div>
+</div>
+
+<!-- 二、五行与水晶的能量对应 -->
+<div class="card">
+  <div class="section-header">
+    <div class="section-icon" style="background: linear-gradient(135deg,#7c3aed,#a78bfa);">☯️</div>
+    <div class="section-title">二、五行与水晶的能量对应</div>
+  </div>
+  <p class="text-body">中国传统五行学说（金、木、水、火、土）是解释宇宙万物相生相克的系统。水晶的能量特性可以通过其<strong style="color:#FF9E40">颜色和形态</strong>对应到五行之中，从而帮助我们进行针对性的能量调理。</p>
+
+  <!-- 金 -->
+  <div class="element-card">
+    <div class="element-header">
+      <div class="element-icon" style="background: linear-gradient(135deg,#e5e7eb,#f9fafb); border: 2px solid #d1d5db;">⚪</div>
+      <div>
+        <div class="element-name" style="color:#9ca3af;">金性水晶：纯净守护</div>
+        <div class="element-sub">白色、金色</div>
+      </div>
     </div>
+    <div class="element-field">
+      <div class="element-label">常见水晶</div>
+      <div class="element-value"><span class="num-badge badge-metal">✦</span>白水晶、白幽灵、钛晶、金发晶</div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">能量功效</div>
+      <div class="element-value">白水晶被称为<strong>"水晶之王"</strong>，磁场能量最为平稳纯粹，是平衡体内能量的最佳选择，能有效消除负能量，增强免疫力和专注力，保平安。金发晶和钛晶象征真阳，能量强大，具有招财和辟邪的双重作用。</div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">对应器官</div>
+      <div class="element-value">🫁 肺、大肠、呼吸系统</div>
+    </div>
+  </div>
 
-    <!-- 导航栏 -->
-    <nav class="fixed top-0 left-0 right-0 z-50 nav-bg border-b border-orange/10">
-        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center">
-                    <i class="fa fa-diamond text-orange"></i>
-                </div>
-                <span class="text-xl font-bold text-orange font-magic">水晶能量</span>
-            </a>
-            <a href="index.html" class="px-4 py-2 rounded-lg border border-orange/30 text-orange hover:bg-orange/10 transition-all duration-300 text-sm font-magic">
-                <i class="fa fa-arrow-left mr-2"></i>返回首页
-            </a>
-        </div>
-    </nav>
+  <!-- 木 -->
+  <div class="element-card">
+    <div class="element-header">
+      <div class="element-icon" style="background: linear-gradient(135deg,#10b981,#34d399);">🟢</div>
+      <div>
+        <div class="element-name" style="color:#10b981;">木性水晶：生长生发</div>
+        <div class="element-sub">绿色、青色、粉紫色</div>
+      </div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">常见水晶</div>
+      <div class="element-value"><span class="num-badge badge-wood">✦</span>绿幽灵、绿发晶、紫水晶</div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">能量功效</div>
+      <div class="element-value">绿色水晶象征<strong>生机与活力</strong>，绿幽灵被誉为"事业之石"，能激发创造力与上进心，促进财运和事业成功。紫水晶凝聚智慧与灵性，有助于思考、提升记忆力，改善睡眠。</div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">对应器官</div>
+      <div class="element-value">🫀 肝、胆、神经系统</div>
+    </div>
+  </div>
 
-    <!-- 主内容 -->
-    <main class="container mx-auto px-4 pt-32 pb-20 relative z-10 max-w-3xl">
-        <!-- 封面 -->
-        <div class="text-center mb-12 animate-fade-in">
-            <div class="inline-flex items-center gap-3 mb-6">
-                <div class="h-1 w-12 rounded-full bg-orange"></div>
-                <span class="text-orange/70 font-magic tracking-wider">FIVE ELEMENTS THEORY</span>
-                <div class="h-1 w-12 rounded-full bg-orange"></div>
-            </div>
-            <h1 class="text-4xl md:text-5xl font-bold text-orange mb-4 text-shadow-glow font-magic">如何用五行能量<br>加持自身磁场</h1>
-            <p class="text-xl text-orange/70 font-magic">金木水火土 × 水晶能量<br>一份完整的五行水晶能量调理指南</p>
-        </div>
+  <!-- 水 -->
+  <div class="element-card">
+    <div class="element-header">
+      <div class="element-icon" style="background: linear-gradient(135deg,#1e3a5f,#3b82f6);">🔵</div>
+      <div>
+        <div class="element-name" style="color:#3b82f6;">水性水晶：沉淀包容</div>
+        <div class="element-sub">黑色、蓝色</div>
+      </div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">常见水晶</div>
+      <div class="element-value"><span class="num-badge badge-water">✦</span>黑曜石、黑碧玺、茶水晶、海蓝宝</div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">能量功效</div>
+      <div class="element-value">黑色水晶具有极强的<strong>吸纳负面能量</strong>的作用，是公认的"辟邪"之王，能形成强大的保护气场，排除不良磁场干扰。同时能滋养肾脏和泌尿系统。</div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">对应器官</div>
+      <div class="element-value">💧 肾、膀胱、生殖系统</div>
+    </div>
+  </div>
 
-        <!-- 引言 -->
-        <div class="magic-card rounded-2xl p-8 crystal-shadow neon-border mb-8 animate-fade-in">
-            <p class="text-orange/80 font-magic leading-relaxed mb-4">在快节奏的现代生活中，我们常常感觉被无形的压力束缚，心灵渴望解脱。这股"无形的力量"，在古老的智慧中被视为<strong class="text-orange">"气"或"能量场"</strong>。而水晶，作为大地孕育的精华，被认为是连接无形世界与有形肉体的桥梁。</p>
-            <p class="text-orange/80 font-magic leading-relaxed">今天，我们就来探讨如何利用水晶的五行属性，来平衡我们自身的能量，达到<strong class="text-orange">加持运势、调和身心</strong>的目的。🔮</p>
-        </div>
+  <!-- 火 -->
+  <div class="element-card">
+    <div class="element-header">
+      <div class="element-icon" style="background: linear-gradient(135deg,#dc2626,#f87171);">🔴</div>
+      <div>
+        <div class="element-name" style="color:#ef4444;">火性水晶：热情活力</div>
+        <div class="element-sub">红色、紫色</div>
+      </div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">常见水晶</div>
+      <div class="element-value"><span class="num-badge badge-fire">✦</span>红玛瑙、石榴石、红发晶、粉晶</div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">能量功效</div>
+      <div class="element-value">红色水晶代表<strong>热情与行动力</strong>，石榴石有助于促进血液循环，增强生命力。粉晶是著名的"爱情之石"，能温柔舒缓情绪，提升人缘和桃花运，让内心保持平和愉悦。</div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">对应器官</div>
+      <div class="element-value">❤️ 心脏、小肠、血液循环</div>
+    </div>
+  </div>
 
-        <!-- 一、何为无形的能量场 -->
-        <div class="magic-card rounded-2xl p-8 crystal-shadow neon-border mb-8 animate-fade-in">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-12 h-12 rounded-full bg-orange/20 flex items-center justify-center text-2xl">🌌</div>
-                <h2 class="text-2xl font-bold text-orange font-magic">一、何为无形的"能量场"？</h2>
-            </div>
-            <p class="text-orange/80 font-magic leading-relaxed mb-4">我们身处的世界，万物皆有其振动频率。人体本身就是一个复杂的能量场，根据现代科学和古老哲学的结合，这种磁场被分为<strong class="text-orange">现实维度的物理电磁场</strong>和<strong class="text-orange">不可测量的"人性磁场"</strong>（或称辉光、以太体）。</p>
-            <p class="text-orange/80 font-magic leading-relaxed mb-4">这种无形的能量场会随着我们的情绪、健康状态甚至思想而变化。当负面情绪过多时，会降低我们的振动频率，使人更容易感到疲惫和痛苦。</p>
-            <div class="highlight-box p-6 rounded-lg">
-                <p class="text-orange/70 font-magic">💎 水晶，因其独特的晶格结构和亿万年的地质淬炼，本身带有<strong class="text-orange">稳定且高频的能量</strong>。佩戴或摆放水晶，就如同为我们自身的能量场注入一股清流，通过<strong>"共振"原理</strong>，将低频能量调节提升为高频能量。</p>
-            </div>
-        </div>
+  <!-- 土 -->
+  <div class="element-card">
+    <div class="element-header">
+      <div class="element-icon" style="background: linear-gradient(135deg,#d97706,#fbbf24);">🟡</div>
+      <div>
+        <div class="element-name" style="color:#f59e0b;">土性水晶：稳定承载</div>
+        <div class="element-sub">黄色、棕色</div>
+      </div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">常见水晶</div>
+      <div class="element-value"><span class="num-badge badge-earth">✦</span>黄水晶、虎眼石、黄兔毛</div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">能量功效</div>
+      <div class="element-value">黄色水晶对应太阳神经丛，是<strong>"财富之石"</strong>，能吸引并稳定偏财，增强自信与决断力，带来成功与机遇。</div>
+    </div>
+    <div class="element-field">
+      <div class="element-label">对应器官</div>
+      <div class="element-value">🫄 脾、胃</div>
+    </div>
+  </div>
+</div>
 
-        <!-- 二、五行与水晶对应 -->
-        <div class="magic-card rounded-2xl p-8 crystal-shadow neon-border mb-8 animate-fade-in">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-12 h-12 rounded-full bg-orange/20 flex items-center justify-center text-2xl">☯️</div>
-                <h2 class="text-2xl font-bold text-orange font-magic">二、五行与水晶的能量对应</h2>
-            </div>
-            <p class="text-orange/80 font-magic leading-relaxed mb-6">中国传统五行学说（金、木、水、火、土）是解释宇宙万物相生相克的系统。水晶的能量特性可以通过其<strong class="text-orange">颜色和形态</strong>对应到五行之中，从而帮助我们进行针对性的能量调理。</p>
+<!-- 三、如何运用水晶加持能量 -->
+<div class="card">
+  <div class="section-header">
+    <div class="section-icon" style="background: linear-gradient(135deg,#10b981,#34d399);">🌈</div>
+    <div class="section-title">三、如何运用水晶加持能量</div>
+  </div>
+  <p class="text-body">了解了无形的能量与有形的五行对应后，我们可以通过以下方式进行能量加持：</p>
 
-            <!-- 金 -->
-            <div class="element-card rounded-xl p-6 mb-4">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-metal/30 flex items-center justify-center text-xl">⚪</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-metal font-magic">金性水晶：纯净守护</h3>
-                        <p class="text-orange/50 text-sm font-magic">白色、金色</p>
-                    </div>
-                </div>
-                <div class="space-y-3 text-orange/70 font-magic text-sm">
-                    <p><strong class="text-orange">常见水晶：</strong>白水晶、白幽灵、钛晶、金发晶</p>
-                    <p><strong class="text-orange">能量功效：</strong>白水晶被称为"水晶之王"，磁场能量最为平稳纯粹，是平衡体内能量的最佳选择，能有效消除负能量，增强免疫力和专注力，保平安。金发晶和钛晶象征真阳，能量强大，具有招财和辟邪的双重作用。</p>
-                    <p><strong class="text-orange">对应器官：</strong>🫁 肺、大肠、呼吸系统</p>
-                </div>
-            </div>
+  <!-- 1. 针对"不足"补充 -->
+  <div class="sub-title">1. 针对五行"不足"进行补充</div>
+  <p class="text-body">在传统命理中，每个人的生辰八字决定了五行的强弱。如果某项元素缺失或较弱，可以选择对应属性的水晶进行能量补充：</p>
 
-            <!-- 木 -->
-            <div class="element-card rounded-xl p-6 mb-4">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-wood/30 flex items-center justify-center text-xl">🟢</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-wood font-magic">木性水晶：生长生发</h3>
-                        <p class="text-orange/50 text-sm font-magic">绿色、青色、粉紫色</p>
-                    </div>
-                </div>
-                <div class="space-y-3 text-orange/70 font-magic text-sm">
-                    <p><strong class="text-orange">常见水晶：</strong>绿幽灵、绿发晶、紫水晶</p>
-                    <p><strong class="text-orange">能量功效：</strong>绿色水晶象征生机与活力，绿幽灵被誉为"事业之石"，能激发创造力与上进心，促进财运和事业成功。紫水晶凝聚智慧与灵性，有助于思考、提升记忆力，改善睡眠。</p>
-                    <p><strong class="text-orange">对应器官：</strong>🫀 肝、胆、神经系统</p>
-                </div>
-            </div>
+  <div class="highlight-box">
+    <p>💧 <strong>八字缺"水"</strong>（常感精力不足/易紧张）→ 佩戴<strong>黑曜石、海蓝宝</strong></p>
+    <p>🔥 <strong>八字缺"火"</strong>（缺乏热情/行动力不足）→ 佩戴<strong>石榴石、红发晶</strong></p>
+    <p>🏔️ <strong>八字缺"土"</strong>（缺乏安全感/财运不稳）→ 佩戴<strong>黄水晶、虎眼石</strong></p>
+  </div>
 
-            <!-- 水 -->
-            <div class="element-card rounded-xl p-6 mb-4">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-water/30 flex items-center justify-center text-xl">🔵</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-water font-magic">水性水晶：沉淀包容</h3>
-                        <p class="text-orange/50 text-sm font-magic">黑色、蓝色</p>
-                    </div>
-                </div>
-                <div class="space-y-3 text-orange/70 font-magic text-sm">
-                    <p><strong class="text-orange">常见水晶：</strong>黑曜石、黑碧玺、茶水晶、海蓝宝</p>
-                    <p><strong class="text-orange">能量功效：</strong>黑色水晶具有极强的吸纳负面能量的作用，是公认的"辟邪"之王，能形成强大的保护气场，排除不良磁场干扰。同时能滋养肾脏和泌尿系统。</p>
-                    <p><strong class="text-orange">对应器官：</strong>💧 肾、膀胱、生殖系统</p>
-                </div>
-            </div>
+  <!-- 2. 针对"过盛"平衡 -->
+  <div class="sub-title">2. 针对五行"过盛"进行平衡</div>
+  <p class="text-body">如果某一行能量过于亢奋，则需要用<strong style="color:#FF9E40">"相克"的元素</strong>来调和，以达到平衡：</p>
 
-            <!-- 火 -->
-            <div class="element-card rounded-xl p-6 mb-4">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-fire/30 flex items-center justify-center text-xl">🔴</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-fire font-magic">火性水晶：热情活力</h3>
-                        <p class="text-orange/50 text-sm font-magic">红色、紫色</p>
-                    </div>
-                </div>
-                <div class="space-y-3 text-orange/70 font-magic text-sm">
-                    <p><strong class="text-orange">常见水晶：</strong>红玛瑙、石榴石、红发晶、粉晶</p>
-                    <p><strong class="text-orange">能量功效：</strong>红色水晶代表热情与行动力，石榴石有助于促进血液循环，增强生命力。粉晶是著名的"爱情之石"，能温柔舒缓情绪，提升人缘和桃花运，让内心保持平和愉悦。</p>
-                    <p><strong class="text-orange">对应器官：</strong>❤️ 心脏、小肠、血液循环</p>
-                </div>
-            </div>
+  <div class="highlight-box">
+    <p>😤 <strong>火过旺</strong>（易怒、急躁）→ 佩戴<strong>黄色（土）或黑色（水）</strong>水晶来平衡火气</p>
+    <p>😔 <strong>水过旺</strong>（犹豫、悲观）→ 佩戴<strong>绿色（木）或红色（火）</strong>水晶来提升活力</p>
+  </div>
 
-            <!-- 土 -->
-            <div class="element-card rounded-xl p-6">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-earth/30 flex items-center justify-center text-xl">🟡</div>
-                    <div>
-                        <h3 class="text-lg font-bold text-earth font-magic">土性水晶：稳定承载</h3>
-                        <p class="text-orange/50 text-sm font-magic">黄色、棕色</p>
-                    </div>
-                </div>
-                <div class="space-y-3 text-orange/70 font-magic text-sm">
-                    <p><strong class="text-orange">常见水晶：</strong>黄水晶、虎眼石、黄兔毛</p>
-                    <p><strong class="text-orange">能量功效：</strong>黄色水晶对应太阳神经丛，是"财富之石"，能吸引并稳定偏财，增强自信与决断力，带来成功与机遇。</p>
-                    <p><strong class="text-orange">对应器官：</strong>🫄 脾、胃</p>
-                </div>
-            </div>
-        </div>
+  <!-- 3. 通用型 -->
+  <div class="sub-title">3. 通用型水晶：白水晶与金发晶</div>
+  <p class="text-body">如果你不确定自己的五行属性，或希望进行全面的能量净化与加持，可以选择<strong style="color:#FF9E40">白水晶和金发晶（钛晶）</strong>。它们被认为超越了简单的五行划分，直接作用于阴阳层次，是能量最纯粹、最全面的选择，适合任何人在任何时候佩戴。</p>
 
-        <!-- 三、如何运用水晶加持能量 -->
-        <div class="magic-card rounded-2xl p-8 crystal-shadow neon-border mb-8 animate-fade-in">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-12 h-12 rounded-full bg-orange/20 flex items-center justify-center text-2xl">🌈</div>
-                <h2 class="text-2xl font-bold text-orange font-magic">三、如何运用水晶加持能量</h2>
-            </div>
-            <p class="text-orange/80 font-magic leading-relaxed mb-6">了解了无形的能量与有形的五行对应后，我们可以通过以下方式进行能量加持：</p>
+  <!-- 4. 佩戴技巧 -->
+  <div class="sub-title">4. 佩戴与使用技巧</div>
+  <ul class="step-list">
+    <li class="step-item">
+      <div class="step-num">✋</div>
+      <div class="step-text"><strong>佩戴位置：</strong>建议将水晶佩戴在<strong>左手</strong>（左进右出），右手则常用于释放负能量（如佩戴黑曜石）。</div>
+    </li>
+    <li class="step-item">
+      <div class="step-num">🌙</div>
+      <div class="step-text"><strong>日常净化：</strong>水晶会吸收负面能量，需要定期消磁（清水冲洗、月光晾晒、晶洞放置）以恢复其能量活性。</div>
+    </li>
+    <li class="step-item">
+      <div class="step-num">🙏</div>
+      <div class="step-text"><strong>意念加持：</strong>在佩戴前，握在手心，静心冥想，许下正向的愿望。水晶是辅助工具，<strong>个人的意念和行动才是改变命运的根本</strong>。</div>
+    </li>
+  </ul>
+</div>
 
-            <h3 class="text-xl font-bold text-orange mb-4 font-magic border-b border-orange/20 pb-2">1. 针对五行"不足"进行补充</h3>
-            <p class="text-orange/80 font-magic leading-relaxed mb-4">在传统命理中，每个人的生辰八字决定了五行的强弱。如果某项元素缺失或较弱，可以选择对应属性的水晶进行能量补充：</p>
-            <div class="highlight-box p-6 rounded-lg mb-6">
-                <p class="text-orange/70 font-magic mb-2">💧 <strong class="text-orange">八字缺"水"</strong>（常感精力不足/易紧张）→ 佩戴<strong>黑曜石、海蓝宝</strong></p>
-                <p class="text-orange/70 font-magic mb-2">🔥 <strong class="text-orange">八字缺"火"</strong>（缺乏热情/行动力不足）→ 佩戴<strong>石榴石、红发晶</strong></p>
-                <p class="text-orange/70 font-magic">🏔️ <strong class="text-orange">八字缺"土"</strong>（缺乏安全感/财运不稳）→ 佩戴<strong>黄水晶、虎眼石</strong></p>
-            </div>
+<!-- 结语 -->
+<div class="card" style="background: linear-gradient(145deg, rgba(255,127,0,0.08) 0%, rgba(255,127,0,0.03) 100%); border-color: rgba(255,127,0,0.2);">
+  <div class="section-header">
+    <div class="section-icon" style="background: rgba(255,127,0,0.2);">✨</div>
+    <div class="section-title" style="color:#FF9E40;">结语</div>
+  </div>
+  <div class="quote-box" style="background: linear-gradient(135deg, rgba(255,127,0,0.05) 0%, rgba(255,127,0,0.02) 100%); border: 1px solid rgba(255, 127, 0, 0.1);">
+    <p class="quote-text" style="font-size:16px;">水晶的能量并非迷信，而是一种通过自然物质与人体微观能量场发生的微妙共振。<br>选择一块与自己五行相应、令你心生欢喜的水晶，<br>都是一次与自然的深度对话。</p>
+  </div>
+  <p class="text-body">让我们在喧嚣中借助这份<strong style="color:#FF9E40">"无形的力量"</strong>，找到属于自己的平衡与光芒。💎✨</p>
+  <div class="divider">🔮 · · · 💎 · · · 🔮</div>
+</div>
 
-            <h3 class="text-xl font-bold text-orange mb-4 font-magic border-b border-orange/20 pb-2">2. 针对五行"过盛"进行平衡</h3>
-            <p class="text-orange/80 font-magic leading-relaxed mb-4">如果某一行能量过于亢奋，则需要用<strong class="text-orange">"相克"的元素</strong>来调和，以达到平衡：</p>
-            <div class="highlight-box p-6 rounded-lg mb-6">
-                <p class="text-orange/70 font-magic mb-2">😤 <strong class="text-orange">火过旺</strong>（易怒、急躁）→ 佩戴<strong>黄色（土）或黑色（水）</strong>水晶来平衡火气</p>
-                <p class="text-orange/70 font-magic">😔 <strong class="text-orange">水过旺</strong>（犹豫、悲观）→ 佩戴<strong>绿色（木）或红色（火）</strong>水晶来提升活力</p>
-            </div>
+<!-- 匿名留言区 -->
+<div class="comments-section">
+  <div class="comments-header">
+    <span style="font-size:20px;">💬</span>
+    <div class="comments-title">留言区</div>
+    <div class="comment-count">12条</div>
+  </div>
 
-            <h3 class="text-xl font-bold text-orange mb-4 font-magic border-b border-orange/20 pb-2">3. 通用型水晶：白水晶与金发晶</h3>
-            <p class="text-orange/80 font-magic leading-relaxed mb-6">如果你不确定自己的五行属性，或希望进行全面的能量净化与加持，可以选择<strong class="text-orange">白水晶和金发晶（钛晶）</strong>。它们被认为超越了简单的五行划分，直接作用于阴阳层次，是能量最纯粹、最全面的选择，适合任何人在任何时候佩戴。</p>
+  <!-- 置顶留言 -->
+  <div class="comment-item" style="background: linear-gradient(135deg, rgba(255,159,64,0.08) 0%, rgba(255,127,0,0.05) 100%); border-radius: 10px; padding: 14px; border: 1px solid rgba(255,127,0,0.15);">
+    <div class="comment-avatar" style="background: linear-gradient(135deg, #FF7F00, #FF9E40);">🧡</div>
+    <div class="comment-content">
+      <div class="comment-user">
+        匿名用户
+        <span class="pinned-badge">📌 置顶</span>
+      </div>
+      <div class="comment-text" style="font-size:15px;">爱了爱了，哪里可以买的到啊，求链接</div>
+      <div class="comment-time">3天前</div>
+      <div class="comment-like liked">❤️ 2,847</div>
+    </div>
+  </div>
 
-            <h3 class="text-xl font-bold text-orange mb-4 font-magic border-b border-orange/20 pb-2">4. 佩戴与使用技巧</h3>
-            <div class="space-y-4">
-                <div class="flex items-start gap-4 p-4 rounded-lg bg-dark-blue/30 border border-orange/10">
-                    <div class="w-8 h-8 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0 text-orange">✋</div>
-                    <div>
-                        <p class="text-orange font-magic font-bold">佩戴位置</p>
-                        <p class="text-orange/70 font-magic text-sm">建议将水晶佩戴在<strong>左手</strong>（左进右出），右手则常用于释放负能量（如佩戴黑曜石）。</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4 p-4 rounded-lg bg-dark-blue/30 border border-orange/10">
-                    <div class="w-8 h-8 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0 text-orange">🌙</div>
-                    <div>
-                        <p class="text-orange font-magic font-bold">日常净化</p>
-                        <p class="text-orange/70 font-magic text-sm">水晶会吸收负面能量，需要定期消磁（清水冲洗、月光晾晒、晶洞放置）以恢复其能量活性。</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4 p-4 rounded-lg bg-dark-blue/30 border border-orange/10">
-                    <div class="w-8 h-8 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0 text-orange">🙏</div>
-                    <div>
-                        <p class="text-orange font-magic font-bold">意念加持</p>
-                        <p class="text-orange/70 font-magic text-sm">在佩戴前，握在手心，静心冥想，许下正向的愿望。水晶是辅助工具，<strong>个人的意念和行动才是改变命运的根本</strong>。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- 其他留言 -->
+  <div class="comment-item">
+    <div class="comment-avatar" style="background: linear-gradient(135deg, #3b82f6, #60a5fa);">🌿</div>
+    <div class="comment-content">
+      <div class="comment-user">匿名用户</div>
+      <div class="comment-text">八字缺水的来报到！一直觉得精力不够，原来可以戴黑曜石，今晚就去下单🛒</div>
+      <div class="comment-time">2天前</div>
+      <div class="comment-like">❤️ 186</div>
+    </div>
+  </div>
 
-        <!-- 结语 -->
-        <div class="magic-card rounded-2xl p-8 crystal-shadow neon-border mb-8 animate-fade-in" style="background: linear-gradient(135deg, rgba(255, 223, 0, 0.05), rgba(255, 159, 64, 0.05));">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-12 h-12 rounded-full bg-orange/20 flex items-center justify-center text-2xl">✨</div>
-                <h2 class="text-2xl font-bold text-orange font-magic">结语</h2>
-            </div>
-            <div class="text-center p-6 rounded-xl bg-dark-blue/30 border border-orange/20 mb-4">
-                <p class="text-orange/80 font-magic text-lg italic leading-relaxed">水晶的能量并非迷信，而是一种通过自然物质与人体微观能量场发生的微妙共振。<br>选择一块与自己五行相应、令你心生欢喜的水晶，<br>都是一次与自然的深度对话。</p>
-            </div>
-            <p class="text-orange/80 font-magic leading-relaxed text-center">让我们在喧嚣中借助这份<strong class="text-orange">"无形的力量"</strong>，找到属于自己的平衡与光芒。💎✨</p>
-            <div class="text-center text-orange/40 text-2xl mt-6">🔮 · · · 💎 · · · 🔮</div>
-        </div>
+  <div class="comment-item">
+    <div class="comment-avatar" style="background: linear-gradient(135deg, #10b981, #34d399);">🌸</div>
+    <div class="comment-content">
+      <div class="comment-user">匿名用户</div>
+      <div class="comment-text">我八字缺火缺土，石榴石+黄水晶组合可以吗？有没有姐妹试过？</div>
+      <div class="comment-time">2天前</div>
+      <div class="comment-like">❤️ 132</div>
+    </div>
+  </div>
 
-        <!-- 声明 -->
-        <div class="text-center py-8 text-orange/40 text-sm font-magic">
-            <p class="mb-2">🔮 声明</p>
-            <p>水晶的"功效"更多基于文化认知和心理暗示，请理性看待。</p>
-            <p>健康问题请咨询专业医生，水晶不可替代正规医疗。</p>
-        </div>
+  <div class="comment-item">
+    <div class="comment-avatar" style="background: linear-gradient(135deg, #ec4899, #f472b6);">💎</div>
+    <div class="comment-content">
+      <div class="comment-user">匿名用户</div>
+      <div class="comment-text">之前完全不懂五行，看完这篇终于知道自己适合什么水晶了！白水晶永远的神！</div>
+      <div class="comment-time">1天前</div>
+      <div class="comment-like">❤️ 98</div>
+    </div>
+  </div>
 
-        <!-- 匿名留言区 -->
-        <div class="magic-card rounded-2xl p-8 crystal-shadow neon-border mb-8 animate-fade-in">
-            <div class="flex items-center gap-4 mb-6">
-                <span class="text-2xl">💬</span>
-                <h2 class="text-2xl font-bold text-orange font-magic">留言区</h2>
-                <div class="bg-orange text-dark text-xs px-3 py-1 rounded-full font-bold">12条</div>
-            </div>
+  <div class="comment-item">
+    <div class="comment-avatar" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">🌙</div>
+    <div class="comment-content">
+      <div class="comment-user">匿名用户</div>
+      <div class="comment-text">那个消磁的方法很实用，之前只知道用清水冲洗，月光晾晒还是第一次听说～</div>
+      <div class="comment-time">1天前</div>
+      <div class="comment-like">❤️ 76</div>
+    </div>
+  </div>
 
-            <!-- 置顶留言 -->
-            <div class="flex gap-4 pb-4 mb-4" style="background: linear-gradient(135deg, rgba(255,159,64,0.08) 0%, rgba(255,127,0,0.05) 100%); border-radius: 10px; padding: 14px; border: 1px solid rgba(255,127,0,0.15);">
-                <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm flex-shrink-0" style="background: linear-gradient(135deg, #FF7F00, #FF9E40);">🧡</div>
-                <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="text-orange/80 font-bold text-sm font-magic">匿名用户</span>
-                        <span class="text-xs px-2 py-0.5 rounded-full" style="background: linear-gradient(135deg, #FF9E40, #FF7F00); color: #0A1929; font-weight: bold;">📌 置顶</span>
-                    </div>
-                    <p class="text-orange/70 font-magic text-sm" style="font-size: 15px;">爱了爱了，哪里可以买到啊，求链接</p>
-                    <p class="text-orange/40 text-xs mt-1">3天前</p>
-                    <p class="text-orange/50 text-xs mt-1">❤️ 2,847</p>
-                </div>
-            </div>
+  <div class="comment-item">
+    <div class="comment-avatar" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">🔮</div>
+    <div class="comment-content">
+      <div class="comment-user">匿名用户</div>
+      <div class="comment-text">求出五行水晶对照图！想保存到手机里随时对照看那种</div>
+      <div class="comment-time">18小时前</div>
+      <div class="comment-like">❤️ 203</div>
+    </div>
+  </div>
 
-            <!-- 其他留言 -->
-            <div class="flex gap-4 pb-4 mb-4">
-                <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm flex-shrink-0" style="background: linear-gradient(135deg, #3b82f6, #60a5fa);">🌿</div>
-                <div class="flex-1">
-                    <p class="text-orange/80 font-bold text-sm font-magic mb-1">匿名用户</p>
-                    <p class="text-orange/70 font-magic text-sm">八字缺水的来报到！一直觉得精力不够，原来可以戴黑曜石，今晚就去下单🛒</p>
-                    <p class="text-orange/40 text-xs mt-1">2天前</p>
-                    <p class="text-orange/50 text-xs mt-1">❤️ 186</p>
-                </div>
-            </div>
+  <div class="comment-item">
+    <div class="comment-avatar" style="background: linear-gradient(135deg, #ef4444, #f87171);">🔥</div>
+    <div class="comment-content">
+      <div class="comment-user">匿名用户</div>
+      <div class="comment-text">火旺的人表示…确实容易暴脾气😭 以后出门带块黄水晶试试</div>
+      <div class="comment-time">12小时前</div>
+      <div class="comment-like">❤️ 65</div>
+    </div>
+  </div>
+</div>
 
-            <div class="flex gap-4 pb-4 mb-4">
-                <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm flex-shrink-0" style="background: linear-gradient(135deg, #10b981, #34d399);">🌸</div>
-                <div class="flex-1">
-                    <p class="text-orange/80 font-bold text-sm font-magic mb-1">匿名用户</p>
-                    <p class="text-orange/70 font-magic text-sm">我八字缺火缺土，石榴石+黄水晶组合可以吗？有没有姐妹试过？</p>
-                    <p class="text-orange/40 text-xs mt-1">2天前</p>
-                    <p class="text-orange/50 text-xs mt-1">❤️ 132</p>
-                </div>
-            </div>
+<!-- 底部 -->
+<div class="footer">
+  <div class="footer-title">🔮 声明</div>
+  <p>水晶的"功效"更多基于文化认知和心理暗示，请理性看待。</p>
+  <p>健康问题请咨询专业医生，水晶不可替代正规医疗。</p>
+</div>
 
-            <div class="flex gap-4 pb-4 mb-4">
-                <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm flex-shrink-0" style="background: linear-gradient(135deg, #ec4899, #f472b6);">💎</div>
-                <div class="flex-1">
-                    <p class="text-orange/80 font-bold text-sm font-magic mb-1">匿名用户</p>
-                    <p class="text-orange/70 font-magic text-sm">之前完全不懂五行，看完这篇终于知道自己适合什么水晶了！白水晶永远的神！</p>
-                    <p class="text-orange/40 text-xs mt-1">1天前</p>
-                    <p class="text-orange/50 text-xs mt-1">❤️ 98</p>
-                </div>
-            </div>
-
-            <div class="flex gap-4 pb-4 mb-4">
-                <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm flex-shrink-0" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">🔮</div>
-                <div class="flex-1">
-                    <p class="text-orange/80 font-bold text-sm font-magic mb-1">匿名用户</p>
-                    <p class="text-orange/70 font-magic text-sm">那个消磁的方法很实用，之前只知道用清水冲洗，月光晾晒还是第一次听说～</p>
-                    <p class="text-orange/40 text-xs mt-1">1天前</p>
-                    <p class="text-orange/50 text-xs mt-1">❤️ 76</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 返回顶部 -->
-        <div class="text-center mt-8">
-            <a href="#" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-orange/30 text-orange hover:bg-orange/10 transition-all duration-300 font-magic">
-                <i class="fa fa-arrow-up"></i> 返回顶部
-            </a>
-        </div>
-    </main>
-
-    <!-- 页脚 -->
-    <footer class="text-center text-orange/50 text-sm py-12 mt-20" style="background: linear-gradient(135deg, #0A1929 0%, #0D2137 100%); border-top: 1px solid rgba(255, 127, 0, 0.2);">
-        <p class="font-magic">© 2026 水晶能量计算器 | 由DSArt+AI.STUDIO创新工作室版权所有</p>
-        <a href="index.html" class="inline-block mt-4 text-orange/60 hover:text-orange transition-colors font-magic">返回水晶能量计算器首页</a>
-    </footer>
 </body>
 </html>
