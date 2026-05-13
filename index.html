@@ -636,6 +636,77 @@
                 </div>
             </section>
         </main>
+        
+        <!-- 匿名留言展示区 -->
+        <section id="guestbook-section" class="magic-card rounded-2xl p-8 crystal-shadow neon-border mt-16 mb-16 relative z-10" style="margin-bottom: 8rem;">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-semibold text-orange mb-2 status-indicator font-magic">
+                    <i class="fa fa-comments-o mr-2"></i>能量留言墙
+                </h2>
+                <p class="text-orange/60 font-magic">分享你的水晶能量体验，匿名留下你的足迹</p>
+            </div>
+            
+            <!-- 留言输入区 -->
+            <div class="mb-8 p-6 rounded-xl bg-dark-blue/30 border border-orange/10">
+                <textarea id="guestbook-input" rows="3" placeholder="写下你的能量感悟..." 
+                    class="w-full px-4 py-3 rounded-lg input-magic focus:outline-none focus:ring-2 focus:ring-gold/50 resize-none font-magic text-orange/80 placeholder-orange/30"></textarea>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-sm text-orange/40 font-magic">匿名留言，无需注册</span>
+                    <button onclick="addGuestbookMessage()" class="px-6 py-2 rounded-lg bg-orange/20 hover:bg-orange/30 text-orange border border-orange/30 transition-all duration-300 font-magic hover-effect">
+                        <i class="fa fa-paper-plane mr-2"></i>发布留言
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 留言列表 -->
+            <div id="guestbook-list" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                <!-- 示例留言 -->
+                <div class="p-4 rounded-lg bg-dark-blue/20 border border-orange/10 hover:border-orange/30 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-user text-orange/60"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-sm text-orange/80 font-magic">神秘探索者</span>
+                                <span class="text-xs text-orange/40 font-magic">刚刚</span>
+                            </div>
+                            <p class="text-orange/70 font-magic text-sm">今天测了五行，发现自己是火命，戴了红玛瑙后感觉整个人都充满了能量！</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 rounded-lg bg-dark-blue/20 border border-orange/10 hover:border-orange/30 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-user text-orange/60"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-sm text-orange/80 font-magic">水晶爱好者</span>
+                                <span class="text-xs text-orange/40 font-magic">5分钟前</span>
+                            </div>
+                            <p class="text-orange/70 font-magic text-sm">推荐的水滴流真的很准，事业运明显提升了，感谢！</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 rounded-lg bg-dark-blue/20 border border-orange/10 hover:border-orange/30 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-user text-orange/60"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-sm text-orange/80 font-magic">能量修行者</span>
+                                <span class="text-xs text-orange/40 font-magic">1小时前</span>
+                            </div>
+                            <p class="text-orange/70 font-magic text-sm">五行平衡真的很重要，之前总是感觉不对劲，现在找到方向了。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     
     <!-- 底部信息 -->
@@ -1366,6 +1437,59 @@
                 }, 30000); // 每30秒更新一次
             }
         })();
+        
+        // 匿名留言板功能
+        function addGuestbookMessage() {
+            const input = document.getElementById('guestbook-input');
+            const message = input.value.trim();
+            
+            if (!message) {
+                alert('请输入留言内容');
+                return;
+            }
+            
+            const list = document.getElementById('guestbook-list');
+            const names = ['神秘探索者', '水晶爱好者', '能量修行者', '五行学徒', '灵性追寻者', '水晶守护者'];
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            
+            const newMessage = document.createElement('div');
+            newMessage.className = 'p-4 rounded-lg bg-dark-blue/20 border border-orange/10 hover:border-orange/30 transition-all duration-300 animate-fade-in';
+            newMessage.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                        <i class="fa fa-user text-orange/60"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-sm text-orange/80 font-magic">${randomName}</span>
+                            <span class="text-xs text-orange/40 font-magic">刚刚</span>
+                        </div>
+                        <p class="text-orange/70 font-magic text-sm">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+                    </div>
+                </div>
+            `;
+            
+            list.insertBefore(newMessage, list.firstChild);
+            input.value = '';
+            
+            // 限制留言数量，最多显示20条
+            while (list.children.length > 20) {
+                list.removeChild(list.lastChild);
+            }
+        }
+        
+        // 回车发送留言
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('guestbook-input');
+            if (input) {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        addGuestbookMessage();
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
